@@ -352,8 +352,134 @@ export const EXPERIENCE = [
 
 export const PROJECTS = [
   {
-    id: "edupulse",
+    id: "clinic-booking",
     featured: true,
+    title: "Clinic Booking API",
+    subtitle: "Concurrency-Safe Scheduling Engine · Django REST Framework",
+    description:
+      "A backend-only clinic appointment scheduling API built to survive the failure mode most booking systems get wrong: two people booking the same slot at the same time. Every appointment is validated against a fixed 30-minute grid stored in timezone-safe UTC, then written inside an atomic transaction guarded by a pessimistic row lock and a composite database constraint — so the database itself refuses a double-booking, not just the application code.",
+    result:
+      "17 passing tests including a ThreadPoolExecutor concurrency test that fires simultaneous booking requests at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
+    tags: [
+      "Python",
+      "Django REST Framework",
+      "PostgreSQL",
+      "Docker",
+      "GitHub Actions",
+    ],
+    liveUrl: "https://clinic-booking-api-fxvt.onrender.com",
+    //gitFrontend: "",
+    gitBackend: "https://github.com/Jess2001/clinic-booking-api/",
+    screenshot: "/assets/clinic-booking-architecture.png",
+    gallery: [
+      {
+        src: "/assets/clinic-booking-architecture.svg",
+        caption:
+          "Request flow: JWT auth → slot validation → atomic transaction → row lock → composite constraint check",
+      },
+    ],
+    architecture: {
+      "Concurrency Control":
+        "select_for_update() pessimistic locking inside transaction.atomic(), backed by a composite UniqueConstraint on (doctor, slot_time) scoped to CONFIRMED status",
+      "Auth & Security":
+        "JWT via rest_framework_simplejwt — patient identity is always derived from the verified token, never from the request body, with PII fields masked in responses",
+      "Testing & CI/CD":
+        "pytest-django suite (17 tests) including a ThreadPoolExecutor test that fires concurrent requests at one slot; GitHub Actions runs the suite on every pull request and auto-deploys to Render",
+    },
+    keyFeatures: [
+      "Fixed-grid, timezone-safe (UTC) 30-minute slot architecture — no ambiguity about what a 'slot' is",
+      "Two independent safeguards against double-booking: an application-level lock and a database-level constraint",
+      "JWT-derived user context prevents client-side patient ID spoofing",
+      "Automated CI pipeline: tests run on every PR, auto-deploy to Render on merge",
+    ],
+  },
+  {
+    id: "xaidi-admin",
+    featured: true,
+    title: "Xaidi Corporate Admin Dashboard",
+    subtitle: "Enterprise Platform · Angular + Django",
+    description:
+      "Designed and engineered the primary multi-tenant administrative suite centralising analytics, operational configs, and user metrics. Built a high-density, real-time frontend using Angular with custom line-graph visualisations, interactive date-range filtering, role-based navigation, and clean data-management tables. Backed by a high-performance Django API layer optimised for complex database queries.",
+    result:
+      "Optimised database schema query execution and field indexing, reducing platform latency.",
+    tags: ["Angular", "Django", "MongoDB", "REST APIs", "UI/UX Design"],
+    liveUrl: "https://dashboard.xaidi.life/login",
+    screenshot: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
+    gallery: [
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
+        caption: "Analytics Interface: Activity Line Charts & Snapshot Widgets",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.37.07.png",
+        caption: "System Profiling: Distribution Layouts & Region Tracking",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.38.03.png",
+        caption: "Record Management: High-Density Search Filtering",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.38.12.png",
+        caption: "Workflow Allocations: Status Tracking & Payout Tables",
+      },
+    ],
+    architecture: {
+      "Frontend Ecosystem": "Angular v18, Modern Minimal UI Styling Patterns",
+      "Backend Core": "Python, Django Framework, Custom API Services",
+      "Payment Integration": "Mpesa STK Push",
+      "Authentication": "Firebase",
+      "Data Storage": "MongoDB",
+    },
+  },
+  {
+    id: "xaidi-migration",
+    featured: false,
+    title: "Xaidi App — React Native to React Migration",
+    subtitle: "Platform Migration · React JS + Material UI",
+    description:
+      "Led the migration of core user-facing screens in the Xaidi platform from React Native to React JS web components, preserving full feature parity and interaction patterns while adapting mobile-first layouts for the browser. Profile and Settings were the two highest-traffic screens in the migration — covering account management, subscription/session data, availability scheduling, theming (light/dark), language preferences, and support channels.",
+    result:
+      "Shipped production-ready web equivalents of two of the app's most-used screens with zero feature regressions, giving the team a reusable pattern for migrating the remaining React Native screens.",
+    tags: ["React", "Material UI", "React Native", "Responsive Design"],
+    liveUrl: "",
+    gitFrontend: "",
+    gitBackend: "",
+    screenshot: "/assets/xaidi-profile-page.png",
+    gallery: [
+      {
+        src: "/assets/xaidi-profile-page.png",
+        caption:
+          "Profile: account overview, personal information, organisation membership, and support channels",
+      },
+      {
+        src: "/assets/xaidi-settings-dark.png",
+        caption:
+          "Settings (dark mode): persona style, theme, language, and notification preferences",
+      },
+      {
+        src: "/assets/xaidi-settings-light.png",
+        caption:
+          "Settings (light mode): the same screen re-themed, verified pixel-for-pixel against the RN version",
+      },
+    ],
+    architecture: {
+      "Frontend Stack":
+        "React JS, Material UI component library, CSS-in-JS theming (light/dark)",
+      "Migration Approach":
+        "Mapped each React Native screen to an equivalent React web component tree, replacing native primitives with MUI/HTML equivalents while keeping the same state and data-fetching logic",
+      "Architecture Pattern":
+        "Shared theme tokens across light/dark mode, reusable form and settings-row components",
+    },
+    keyFeatures: [
+      "Full feature-parity migration of the Profile screen: account info, active subscription, availability, organisation membership",
+      "Settings screen with live theme switching (system / light / dark), 5-language selector, and granular notification toggles",
+      "Consistent design system carried over from the React Native app so returning users felt no disruption",
+      "Reusable settings-row and card patterns intended for the rest of the app's migration",
+    ],
+  },
+  {
+    id: "edupulse",
+    featured: false,
     title: "EduPulse Results",
     subtitle: "Education Analytics · Angular 20 + Spring Boot",
     description:
@@ -368,6 +494,7 @@ export const PROJECTS = [
       "REST APIs",
       "RxJS",
     ],
+
     //liveUrl: "http://localhost:4200",
     gitFrontend: "https://github.com/Jess2001/edu-pulse-frontend",
     gitBackend: "https://github.com/Jess2001/edu_pulse",
@@ -410,43 +537,7 @@ export const PROJECTS = [
       "Environment-based API configuration for multi-environment deployment",
     ],
   },
-  {
-    id: "xaidi-admin",
-    featured: true,
-    title: "Xaidi Corporate Admin Dashboard",
-    subtitle: "Enterprise Platform · Angular + Django",
-    description:
-      "Designed and engineered the primary multi-tenant administrative suite centralising analytics, operational configs, and user metrics. Built a high-density, real-time frontend using Angular with custom line-graph visualisations, interactive date-range filtering, role-based navigation, and clean data-management tables. Backed by a high-performance Django API layer optimised for complex database queries.",
-    result:
-      "Optimised database schema query execution and field indexing, reducing platform latency by 30%.",
-    tags: ["Angular", "Django", "MongoDB", "REST APIs", "UI/UX Design"],
-    liveUrl: "https://dashboard.xaidi.life/login",
-    screenshot: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
-    gallery: [
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
-        caption: "Analytics Interface: Activity Line Charts & Snapshot Widgets",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.37.07.png",
-        caption: "System Profiling: Distribution Layouts & Region Tracking",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.38.03.png",
-        caption: "Record Management: High-Density Search Filtering",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.38.12.png",
-        caption: "Workflow Allocations: Status Tracking & Payout Tables",
-      },
-    ],
-    architecture: {
-      "Frontend Ecosystem": "Angular v18, Modern Minimal UI Styling Patterns",
-      "Backend Core": "Python, Django Framework, Custom API Services",
-      "Data Storage": "MongoDB, Memory Caching Layers",
-    },
-  },
-  {
+  /* {
     id: "xaidi-web",
     featured: false,
     title: "Xaidi Corporate Web Platform",
@@ -487,7 +578,7 @@ export const PROJECTS = [
       "Design & Styling": "Tailwind CSS Utility Styling, Modern Layout Systems",
       Performance: "40% Page Load Drop, 20% Direct User Interaction Uplift",
     },
-  },
+  }, */
   /*   {
     id: "credit-risk",
     featured: false,
