@@ -61,8 +61,8 @@ export const IMPACT_METRICS = [
 export const PROFILE = {
   name: "Jecinta Wangui",
   shortName: "Jess",
-  role: "Full Stack Software Developer",
-  currentCompany: "Izola Life",
+  role: "Full Stack Software Developer[Front-end Focused]",
+  //currentCompany: "Izola Life",
   location: "Nairobi, Kenya",
   timezone: "GMT+3 (EAT)",
   yearsExperience: "2+",
@@ -310,7 +310,7 @@ export const EXPERIENCE = [
     stack: "React · Angular ·  Django",
     company: "Izola Life",
     location: "Kiambu, Kenya · Hybrid",
-    period: "June 2024 – Present",
+    period: "July 2024 – June 2026 ",
     color: "violet",
     bullets: [
       "Built secure multi-tenant Django REST APIs with JWT authentication and role-based access control.",
