@@ -352,6 +352,86 @@ export const EXPERIENCE = [
 
 export const PROJECTS = [
   {
+    id: "xaidi-web",
+    featured: false,
+    title: "Xaidi Corporate Web Platform",
+    subtitle: "Marketing Site · React + TypeScript",
+    description:
+      "Designed and engineered a high-fidelity, responsive marketing and client discovery platform for corporate and individual pipelines. Implemented smooth grid layouts, micro-interactions, custom media content blocks, and modular landing frames using component-driven React. Integrated lightweight styling and global asset handling for exceptional search visibility and rapid user conversion.",
+    result:
+      "Reduced standard page loading thresholds by 40%, generating a measurable 20% surge in customer engagement funnels.",
+    tags: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Component Architecture",
+      "UI/UX",
+    ],
+    liveUrl: "https://www.xaidi.life/",
+    screenshot: "/assets/Screenshot 2026-05-18 at 15.56.36.png",
+    gallery: [
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.56.36.png",
+        caption: "B2C Product Funnel: Dynamic CTA Placements & App Downloads",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.57.47.png",
+        caption: "B2B Product Funnel: Conversion Triggers & Screen Previews",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.57.01.jpg",
+        caption: "Platform Engineering: Multi-Column Feature Matrix Cards",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.57.52.jpg",
+        caption: "Media Integration: Publication Card Feeds & Editorial Grids",
+      },
+    ],
+    architecture: {
+      "UI Framework": "React JS, TypeScript, Reusable Component Blocks",
+      "Design & Styling": "Tailwind CSS Utility Styling, Modern Layout Systems",
+      Performance: "40% Page Load Drop, 20% Direct User Interaction Uplift",
+    },
+  },
+  {
+    id: "xaidi-admin",
+    featured: true,
+    title: "Xaidi Corporate Admin Dashboard",
+    subtitle: "Enterprise Platform · Angular + Django",
+    description:
+      "Designed and engineered the primary multi-tenant administrative suite centralising analytics, operational configs, and user metrics. Built a high-density, real-time frontend using Angular with custom line-graph visualisations, interactive date-range filtering, role-based navigation, and clean data-management tables. Backed by a high-performance Django API layer optimised for complex database queries.",
+    result:
+      "Optimised database schema query execution and field indexing, reducing platform latency.",
+    tags: ["Angular", "Django", "MongoDB", "REST APIs", "UI/UX Design"],
+    liveUrl: "https://dashboard.xaidi.life/login",
+    screenshot: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
+    gallery: [
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
+        caption: "Analytics Interface: Activity Line Charts & Snapshot Widgets",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.37.07.png",
+        caption: "System Profiling: Distribution Layouts & Region Tracking",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.38.03.png",
+        caption: "Record Management: High-Density Search Filtering",
+      },
+      {
+        src: "/assets/Screenshot 2026-05-18 at 15.38.12.png",
+        caption: "Workflow Allocations: Status Tracking & Payout Tables",
+      },
+    ],
+    architecture: {
+      "Frontend Ecosystem": "Angular v18, Modern Minimal UI Styling Patterns",
+      "Backend Core": "Python, Django Framework, Custom API Services",
+      "Payment Integration": "Mpesa STK Push",
+      Authentication: "Firebase",
+      "Data Storage": "MongoDB",
+    },
+  },
+  {
     id: "clinic-booking",
     featured: true,
     title: "Clinic Booking API",
@@ -393,44 +473,7 @@ export const PROJECTS = [
       "Automated CI pipeline: tests run on every PR, auto-deploy to Render on merge",
     ],
   },
-  {
-    id: "xaidi-admin",
-    featured: true,
-    title: "Xaidi Corporate Admin Dashboard",
-    subtitle: "Enterprise Platform · Angular + Django",
-    description:
-      "Designed and engineered the primary multi-tenant administrative suite centralising analytics, operational configs, and user metrics. Built a high-density, real-time frontend using Angular with custom line-graph visualisations, interactive date-range filtering, role-based navigation, and clean data-management tables. Backed by a high-performance Django API layer optimised for complex database queries.",
-    result:
-      "Optimised database schema query execution and field indexing, reducing platform latency.",
-    tags: ["Angular", "Django", "MongoDB", "REST APIs", "UI/UX Design"],
-    liveUrl: "https://dashboard.xaidi.life/login",
-    screenshot: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
-    gallery: [
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.36.57.png",
-        caption: "Analytics Interface: Activity Line Charts & Snapshot Widgets",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.37.07.png",
-        caption: "System Profiling: Distribution Layouts & Region Tracking",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.38.03.png",
-        caption: "Record Management: High-Density Search Filtering",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.38.12.png",
-        caption: "Workflow Allocations: Status Tracking & Payout Tables",
-      },
-    ],
-    architecture: {
-      "Frontend Ecosystem": "Angular v18, Modern Minimal UI Styling Patterns",
-      "Backend Core": "Python, Django Framework, Custom API Services",
-      "Payment Integration": "Mpesa STK Push",
-      "Authentication": "Firebase",
-      "Data Storage": "MongoDB",
-    },
-  },
+
   {
     id: "xaidi-migration",
     featured: false,
@@ -537,48 +580,7 @@ export const PROJECTS = [
       "Environment-based API configuration for multi-environment deployment",
     ],
   },
-  /* {
-    id: "xaidi-web",
-    featured: false,
-    title: "Xaidi Corporate Web Platform",
-    subtitle: "Marketing Site · React + TypeScript",
-    description:
-      "Designed and engineered a high-fidelity, responsive marketing and client discovery platform for corporate and individual pipelines. Implemented smooth grid layouts, micro-interactions, custom media content blocks, and modular landing frames using component-driven React. Integrated lightweight styling and global asset handling for exceptional search visibility and rapid user conversion.",
-    result:
-      "Reduced standard page loading thresholds by 40%, generating a measurable 20% surge in customer engagement funnels.",
-    tags: [
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "Component Architecture",
-      "UI/UX",
-    ],
-    liveUrl: "https://www.xaidi.life/",
-    screenshot: "/assets/Screenshot 2026-05-18 at 15.56.36.png",
-    gallery: [
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.56.36.png",
-        caption: "B2C Product Funnel: Dynamic CTA Placements & App Downloads",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.57.47.png",
-        caption: "B2B Product Funnel: Conversion Triggers & Screen Previews",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.57.01.jpg",
-        caption: "Platform Engineering: Multi-Column Feature Matrix Cards",
-      },
-      {
-        src: "/assets/Screenshot 2026-05-18 at 15.57.52.jpg",
-        caption: "Media Integration: Publication Card Feeds & Editorial Grids",
-      },
-    ],
-    architecture: {
-      "UI Framework": "React JS, TypeScript, Reusable Component Blocks",
-      "Design & Styling": "Tailwind CSS Utility Styling, Modern Layout Systems",
-      Performance: "40% Page Load Drop, 20% Direct User Interaction Uplift",
-    },
-  }, */
+
   /*   {
     id: "credit-risk",
     featured: false,
