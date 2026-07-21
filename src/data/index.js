@@ -309,7 +309,7 @@ export const EXPERIENCE = [
     role: "Software Engineer",
     stack: "React · Angular ·  Django",
     company: "Izola Life",
-    location: "Kiambu, Kenya · Hybrid",
+    location: "Kiambu, Kenya · Remote",
     period: "July 2024 – June 2026 ",
     color: "violet",
     bullets: [
@@ -353,7 +353,7 @@ export const EXPERIENCE = [
 export const PROJECTS = [
   {
     id: "xaidi-web",
-    featured: false,
+    featured: true,
     title: "Xaidi Corporate Web Platform",
     subtitle: "Marketing Site · React + TypeScript",
     description:
@@ -433,7 +433,7 @@ export const PROJECTS = [
   },
   {
     id: "clinic-booking",
-    featured: true,
+    featured: false,
     title: "Clinic Booking API",
     subtitle: "Concurrency-Safe Scheduling Engine · Django REST Framework",
     description:

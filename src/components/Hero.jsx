@@ -28,7 +28,7 @@ export default function Hero() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold font-['Poppins',sans-serif] leading-[1.08] tracking-tight text-white">
             Full-Stack{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">
-              Software Engineer
+              Software Engineer 
             </span>
           </h1>
 
@@ -42,7 +42,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
             <span className="flex items-center gap-1.5">
               <Icon name="work" className="!text-base text-blue-400" />
-              Shipping production software @ Izola Life
+              Shipping production software 
             </span>
 
             <span className="flex items-center gap-1.5">
