@@ -38,8 +38,10 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            className="w-9 h-9 flex items-center justify-center rounded-md border border-border text-ink-soft hover:text-ink hover:border-accent transition-colors"
+            aria-label={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
+            className="w-9 h-9 flex items-center justify-center rounded-md border border-border-accent text-ink-soft hover:text-ink hover:border-accent transition-colors"
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} size={16} />
           </button>
@@ -47,14 +49,14 @@ export default function Navbar() {
             href={SOCIAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ink-soft hover:text-ink transition-colors text-[14.5px]"
+            className="text-ink-soft hover:text-ink transition-colors text-[14.5px] rounded-md border border-border-accent px-3 py-2 hover:border-accent"
           >
             GitHub
           </a>
           <a
             href={SOCIAL_LINKS.resume}
             download
-            className="inline-flex items-center gap-1.5 text-[14.5px] font-medium text-ink border border-border hover:border-accent rounded-lg px-4 py-2 transition-colors"
+            className="inline-flex bg-accent hover:bg-accent-hover text-white items-center gap-1.5 text-[14.5px] font-medium text-ink border border-border hover:border-accent rounded-lg px-4 py-2 transition-colors"
           >
             <Icon name="download" size={15} />
             Resume
@@ -64,7 +66,9 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
             className="w-9 h-9 flex items-center justify-center rounded-md border border-border text-ink-soft"
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} size={16} />
@@ -86,7 +90,7 @@ export default function Navbar() {
               key={link.href}
               to={`/${link.href}`}
               onClick={() => setOpen(false)}
-              className="text-ink text-[15px]"
+              className="text-ink text-[15px] bg-accent/5 hover:bg-accent/10 transition-colors rounded-lg px-4 py-2"
             >
               {link.label}
             </Link>

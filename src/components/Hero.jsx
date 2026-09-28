@@ -56,7 +56,7 @@ export default function Hero() {
             <a
               href={SOCIAL_LINKS.resume}
               download
-              className="inline-flex items-center gap-2 border border-border hover:border-accent text-ink px-5 py-2.5 rounded-lg text-[14.5px] font-medium transition-colors"
+              className="inline-flex items-center gap-2 border border-accent hover:border-accent text-ink px-5 py-2.5 rounded-lg text-[14.5px] font-medium transition-colors"
             >
               <Icon name="download" size={15} />
               Download CV
@@ -65,7 +65,7 @@ export default function Hero() {
               href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink-soft hover:text-ink text-[14.5px] transition-colors"
+              className="text-ink-soft  hover:text-ink text-[14.5px] transition-colors"
             >
               GitHub
             </a>
