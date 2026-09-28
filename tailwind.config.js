@@ -31,7 +31,7 @@ export default {
         ],
       },
       maxWidth: {
-        content: "1120px",
+        content: "1800px",
       },
     },
   },

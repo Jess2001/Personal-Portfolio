@@ -15,7 +15,7 @@ const STACK = [
 export default function Hero() {
   return (
     <section className="w-full max-w-content mx-auto px-6 md:px-8 pt-40 pb-20 md:pt-48 md:pb-28">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_0.65fr] gap-14 lg:gap-16 items-start">
         <div>
           <p className="text-[14.5px] font-mono text-accent mb-6">
             Open to new opportunities
@@ -28,9 +28,9 @@ export default function Hero() {
             Software Developer
           </p>
 
-          <p className="mt-7 text-[17px] md:text-[18px] text-ink-soft leading-8 max-w-xl">
-            I build full-stack applications — Angular and React on the
-            frontend, Django REST Framework and Spring Boot on the backend,
+          <p className="mt-9 text-[17px] md:text-[18px] text-ink-soft leading-8 max-w-xl">
+            I build full-stack web applications , Angular and React on the
+            frontend, Python,(Django) and Java on the backend,
             with PostgreSQL and MongoDB for data. Most of my production work
             so far has been in healthcare and fintech, based in Nairobi,
             Kenya.
@@ -80,7 +80,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="w-full max-w-[340px] lg:max-w-none lg:justify-self-end">
+        <div className="w-full max-w-[140px] lg:max-w-none lg:justify-self-end">
           <div className="aspect-[4/5] w-full rounded-xl overflow-hidden border border-border bg-muted">
             <img
               src="/assets/Jess.jpeg"
