@@ -310,7 +310,7 @@ export const EXPERIENCE = [
     stack: "React · Angular ·  Django",
     company: "Izola Life",
     location: "Kiambu, Kenya · Remote",
-    period: "July 2024 – June 2026 ",
+    period: "July 2024 – September 2026 ",
     color: "violet",
     bullets: [
       "Built secure multi-tenant Django REST APIs with JWT authentication and role-based access control.",
@@ -325,7 +325,7 @@ export const EXPERIENCE = [
     stack: "Angular · REST API Integration",
     company: "E and M Technology House",
     location: "Tatu City, Kenya · On-site",
-    period: "August 2023 – March 2024",
+    period: "August 2023 – January 2024",
     color: "purple",
     bullets: [
       "Built and maintained responsive UI features in Angular for a fintech front-end application, translating design specs into polished, reusable components.",

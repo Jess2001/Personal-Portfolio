@@ -4,8 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+    <title>Jecinta Wangui — Software Developer</title>
     <script>
+      // Apply the saved (or system) theme before paint, so there is no
+      // flash of the wrong theme on load.
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
       // Polyfill for Node.js globals required by aws-sdk
       window.global = window;
       window.process = window.process || { env: {} };
