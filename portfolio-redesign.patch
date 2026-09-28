@@ -1,0 +1,2021 @@
+diff --git a/index.html b/index.html
+index fc5871b..b1ac833 100644
+--- a/index.html
++++ b/index.html
+@@ -4,8 +4,21 @@
+     <meta charset="UTF-8" />
+     <link rel="icon" type="image/png" href="/icon.png" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <title>Portfolio</title>
++    <title>Jecinta Wangui — Software Developer</title>
+     <script>
++      // Apply the saved (or system) theme before paint, so there is no
++      // flash of the wrong theme on load.
++      (function () {
++        try {
++          var stored = localStorage.getItem("theme");
++          var theme =
++            stored ||
++            (window.matchMedia("(prefers-color-scheme: dark)").matches
++              ? "dark"
++              : "light");
++          document.documentElement.setAttribute("data-theme", theme);
++        } catch (e) {}
++      })();
+       // Polyfill for Node.js globals required by aws-sdk
+       window.global = window;
+       window.process = window.process || { env: {} };
+diff --git a/src/App.jsx b/src/App.jsx
+index 2e5c6d6..b81c696 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -5,8 +5,14 @@ import ProjectsPage from "./pages/ProjectsPage";
+ export default function App() {
+   return (
+     <>
+-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" />
+-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
++      <link
++        rel="preconnect"
++        href="https://fonts.googleapis.com"
++      />
++      <link
++        rel="stylesheet"
++        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
++      />
+       <Routes>
+         <Route path="/" element={<Home />} />
+         <Route path="/projects" element={<ProjectsPage />} />
+diff --git a/src/components/About.jsx b/src/components/About.jsx
+index 3eea717..e1dd180 100644
+--- a/src/components/About.jsx
++++ b/src/components/About.jsx
+@@ -1,70 +1,62 @@
+-import { useInView } from "../hooks";
+-import { Icon } from "./ui";
+-import { ABOUT } from "../data";
+-import Terminal from "./Terminal";
++import { ABOUT, PROFILE } from "../data";
+ 
+-function Point({ point, delay }) {
+-  const [ref, inView] = useInView();
++const NOW = [
++  { label: "Role", value: "Software Developer" },
++  { label: "Stack", value: "Angular · React · Django · Spring Boot" },
++  { label: "Focus", value: "Healthcare and fintech platforms" },
++  { label: "Based in", value: PROFILE.location },
++  { label: "Status", value: PROFILE.availability },
++];
+ 
++function Point({ point }) {
+   return (
+-    <div
+-      ref={ref}
+-      className={`flex gap-5 transition-all duration-700 ${
+-        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+-      }`}
+-      style={{ transitionDelay: `${delay}ms` }}
+-    >
+-      <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+-        <Icon name={point.icon} className="!text-xl text-blue-400" />
+-      </div>
+-
+-      <div>
+-        <h3 className="text-lg font-semibold text-white mb-2">{point.title}</h3>
+-
+-        <p className="text-slate-400 leading-7">{point.body}</p>
+-      </div>
++    <div className="border-t border-border pt-5">
++      <h3 className="text-[16px] font-semibold text-ink mb-2">
++        {point.title}
++      </h3>
++      <p className="text-ink-soft text-[15px] leading-7">{point.body}</p>
+     </div>
+   );
+ }
+ 
+ export default function About() {
+-  const [ref, inView] = useInView();
+-
+   return (
+     <section
+       id="about"
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-32"
++      className="w-full max-w-content mx-auto px-6 md:px-8 py-20 md:py-24"
+     >
+-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+-        {/* Left */}
+-        <div
+-          ref={ref}
+-          className={`transition-all duration-700 ${
+-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+-          }`}
+-        >
+-          <span className="text-blue-400 uppercase tracking-[0.25em] text-xs font-semibold">
+-            ABOUT ME
+-          </span>
+-
+-          <h2 className="mt-3 text-4xl font-bold font-['Poppins',sans-serif] text-white leading-tight">
+-            Building software that balances
+-            <span className="text-blue-400"> user experience </span>
+-            with solid engineering.
++      <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-16">
++        <div>
++          <h2 className="text-[28px] md:text-[34px] font-semibold text-ink leading-tight tracking-[-0.01em] mb-6">
++            Building software that balances user experience with solid
++            engineering.
+           </h2>
+ 
+-          <p className="mt-6 text-slate-400 leading-8 text-lg">{ABOUT.intro}</p>
++          <p className="text-ink-soft leading-8 text-[16.5px] max-w-xl">
++            {ABOUT.intro}
++          </p>
+ 
+-          <div className="mt-12 space-y-8">
+-            {ABOUT.points.map((point, index) => (
+-              <Point key={point.title} point={point} delay={index * 120} />
++          <div className="mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-6">
++            {ABOUT.points.map((point) => (
++              <Point key={point.title} point={point} />
+             ))}
+           </div>
+         </div>
+ 
+-        {/* Right */}
+-        <div className="lg:sticky lg:top-28">
+-          <Terminal />
++        <div className="lg:sticky lg:top-28 h-fit">
++          <div className="border border-border rounded-lg p-6 bg-muted">
++            <p className="font-mono text-[12.5px] text-ink-soft mb-5">Now</p>
++            <dl className="space-y-4">
++              {NOW.map((item) => (
++                <div key={item.label}>
++                  <dt className="font-mono text-[11.5px] text-ink-soft mb-1">
++                    {item.label}
++                  </dt>
++                  <dd className="text-[14.5px] text-ink">{item.value}</dd>
++                </div>
++              ))}
++            </dl>
++          </div>
+         </div>
+       </div>
+     </section>
+diff --git a/src/components/Contact.jsx b/src/components/Contact.jsx
+index c4f7b5b..66c0d7f 100644
+--- a/src/components/Contact.jsx
++++ b/src/components/Contact.jsx
+@@ -1,10 +1,11 @@
+ import { useState } from "react";
+-import { useInView } from "../hooks";
+-import { GlowOrb, Icon } from "./ui";
+-import { SOCIAL_LINKS, PROFILE } from "../data";
++import { Icon } from "./ui";
++import { SOCIAL_LINKS } from "../data";
++
++const inputClass =
++  "w-full bg-bg border border-border focus:border-accent outline-none rounded-lg px-4 py-2.5 text-ink text-[14.5px] placeholder:text-ink-soft transition-colors";
+ 
+ export default function Contact() {
+-  const [ref, inView] = useInView();
+   const [form, setForm] = useState({ name: "", email: "", message: "" });
+ 
+   const handleSubmit = (e) => {
+@@ -21,120 +22,97 @@ export default function Contact() {
+   return (
+     <section
+       id="contact"
+-      ref={ref}
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-28"
++      className="w-full max-w-content mx-auto px-6 md:px-8 py-20 md:py-24 border-t border-border"
+     >
+-      <div
+-        className={`relative bg-gradient-to-br from-blue-600/10 to-sky-600/5 border border-blue-500/20 rounded-3xl p-8 md:p-14 overflow-hidden transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+-      >
+-        <GlowOrb className="top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-blue-500/15" />
+-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+-          <div>
+-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
+-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+-              <span className="text-xs font-semibold tracking-widest text-blue-300 uppercase">
+-                {PROFILE.availability}
+-              </span>
+-            </div>
+-            <h2 className="text-4xl md:text-5xl font-extrabold font-['Poppins',sans-serif] text-white mb-6 leading-tight">
+-              Let's build something impactful.
+-            </h2>
+-            <p className="text-slate-400 max-w-lg leading-relaxed mb-8">
+-              Whether you're hiring, have a project in mind, or just want to
+-              talk architecture — I read every message.
+-            </p>
+-            <div className="space-y-4">
+-              <a
+-                href={`mailto:${SOCIAL_LINKS.email}`}
+-                className="flex items-center gap-3 text-slate-300 hover:text-blue-300 transition-colors text-sm font-medium"
+-              >
+-                <Icon name="mail" className="!text-lg text-blue-400" />{" "}
+-                {SOCIAL_LINKS.email}
+-              </a>
+-              <a
+-                href={SOCIAL_LINKS.linkedin}
+-                target="_blank"
+-                rel="noopener noreferrer"
+-                className="flex items-center gap-3 text-slate-300 hover:text-blue-300 transition-colors text-sm font-medium"
+-              >
+-                <Icon name="person" className="!text-lg text-blue-400" />{" "}
+-                LinkedIn
+-              </a>
+-              <a
+-                href={SOCIAL_LINKS.github}
+-                target="_blank"
+-                rel="noopener noreferrer"
+-                className="flex items-center gap-3 text-slate-300 hover:text-blue-300 transition-colors text-sm font-medium"
+-              >
+-                <Icon name="code" className="!text-lg text-blue-400" /> GitHub
+-              </a>
+-              <a
+-                href={SOCIAL_LINKS.resume}
+-                download
+-                className="flex items-center gap-3 text-slate-300 hover:text-blue-300 transition-colors text-sm font-medium"
+-              >
+-                <Icon name="download" className="!text-lg text-blue-400" />{" "}
+-                Download Résumé
+-              </a>
+-              <p className="flex items-center gap-3 text-slate-500 text-sm font-medium">
+-                <Icon name="location_on" className="!text-lg text-blue-400" />{" "}
+-                {PROFILE.location}
+-              </p>
+-            </div>
+-          </div>
+-
+-          <form onSubmit={handleSubmit} className="space-y-4">
+-            <div>
+-              <label className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 block">
+-                Name
+-              </label>
+-              <input
+-                required
+-                type="text"
+-                value={form.name}
+-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+-                className="w-full bg-black/30 border border-white/10 focus:border-blue-500/50 outline-none rounded-xl px-4 py-3 text-white text-sm placeholder:text-slate-600 transition-colors"
+-                placeholder="Your name"
+-              />
+-            </div>
+-            <div>
+-              <label className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 block">
+-                Email
+-              </label>
+-              <input
+-                required
+-                type="email"
+-                value={form.email}
+-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+-                className="w-full bg-black/30 border border-white/10 focus:border-blue-500/50 outline-none rounded-xl px-4 py-3 text-white text-sm placeholder:text-slate-600 transition-colors"
+-                placeholder="you@example.com"
+-              />
+-            </div>
+-            <div>
+-              <label className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 block">
+-                Message
+-              </label>
+-              <textarea
+-                required
+-                rows={4}
+-                value={form.message}
+-                onChange={(e) => setForm({ ...form, message: e.target.value })}
+-                className="w-full bg-black/30 border border-white/10 focus:border-blue-500/50 outline-none rounded-xl px-4 py-3 text-white text-sm placeholder:text-slate-600 transition-colors resize-none"
+-                placeholder="What are you building?"
+-              />
+-            </div>
+-            <button
+-              type="submit"
+-              className="w-full bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all hover:scale-[1.01] active:scale-[0.99] inline-flex items-center justify-center gap-2"
++      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
++        <div>
++          <h2 className="text-[28px] md:text-[34px] font-semibold text-ink mb-5 tracking-[-0.01em]">
++            Interested in working together?
++          </h2>
++          <p className="text-ink-soft leading-7 max-w-md mb-8 text-[15.5px]">
++            I'm open to software engineering opportunities, particularly
++            backend and full-stack roles.
++          </p>
++          <div className="space-y-3.5">
++            <a
++              href={`mailto:${SOCIAL_LINKS.email}`}
++              className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
++            >
++              <Icon name="mail" size={16} /> {SOCIAL_LINKS.email}
++            </a>
++            <a
++              href={SOCIAL_LINKS.linkedin}
++              target="_blank"
++              rel="noopener noreferrer"
++              className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
+             >
+-              <Icon name="send" className="!text-base" /> Send via email
+-            </button>
+-            <p className="text-slate-600 text-xs text-center">
+-              Opens your email client with this message pre-filled — nothing is
+-              stored.
++              <Icon name="linkedin" size={16} /> LinkedIn
++            </a>
++            <a
++              href={SOCIAL_LINKS.github}
++              target="_blank"
++              rel="noopener noreferrer"
++              className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
++            >
++              <Icon name="github" size={16} /> GitHub
++            </a>
++            <p className="flex items-center gap-3 text-ink-soft text-[14.5px]">
++              <Icon name="location" size={16} /> Nairobi, Kenya
+             </p>
+-          </form>
++          </div>
+         </div>
++
++        <form onSubmit={handleSubmit} className="space-y-4">
++          <div>
++            <label className="text-[13px] text-ink-soft mb-1.5 block">
++              Name
++            </label>
++            <input
++              required
++              type="text"
++              value={form.name}
++              onChange={(e) => setForm({ ...form, name: e.target.value })}
++              className={inputClass}
++              placeholder="Your name"
++            />
++          </div>
++          <div>
++            <label className="text-[13px] text-ink-soft mb-1.5 block">
++              Email
++            </label>
++            <input
++              required
++              type="email"
++              value={form.email}
++              onChange={(e) => setForm({ ...form, email: e.target.value })}
++              className={inputClass}
++              placeholder="you@example.com"
++            />
++          </div>
++          <div>
++            <label className="text-[13px] text-ink-soft mb-1.5 block">
++              Message
++            </label>
++            <textarea
++              required
++              rows={4}
++              value={form.message}
++              onChange={(e) => setForm({ ...form, message: e.target.value })}
++              className={`${inputClass} resize-none`}
++              placeholder="What are you building?"
++            />
++          </div>
++          <button
++            type="submit"
++            className="w-full bg-accent hover:bg-accent-hover text-white px-6 py-2.5 rounded-lg font-medium text-[14.5px] transition-colors inline-flex items-center justify-center gap-2"
++          >
++            Send via email
++          </button>
++          <p className="text-ink-soft text-[12.5px] text-center">
++            Opens your email client with this message pre-filled — nothing
++            is stored.
++          </p>
++        </form>
+       </div>
+     </section>
+   );
+diff --git a/src/components/CtaFooter.jsx b/src/components/CtaFooter.jsx
+index fc5d62b..d362225 100644
+--- a/src/components/CtaFooter.jsx
++++ b/src/components/CtaFooter.jsx
+@@ -3,27 +3,26 @@ import { SOCIAL_LINKS } from "../data";
+ 
+ export function Footer() {
+   return (
+-    <footer className="w-full py-14 px-6 md:px-12 border-t border-white/5 bg-black">
+-      <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+-        <div className="text-center md:text-left space-y-3">
+-          <div className="text-lg font-bold text-white font-['Poppins',sans-serif]">
+-            Jess<span className="text-blue-400">.</span>
++    <footer className="w-full py-12 px-6 md:px-8 border-t border-border">
++      <div className="max-w-content mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
++        <div className="text-center md:text-left">
++          <div className="text-[15px] font-semibold text-ink">
++            Jecinta Wangui
+           </div>
+-          <p className="text-slate-600 text-sm max-w-xs">
+-            Full-Stack Engineer turning complex problems into elegant digital
+-            experiences.
++          <p className="text-ink-soft text-[13.5px] mt-1">
++            Software Developer, Nairobi, Kenya
+           </p>
+         </div>
+-        <div className="flex gap-12">
+-          <div className="flex flex-col gap-3">
+-            <span className="text-slate-700 text-[10px] uppercase font-bold tracking-widest">
++        <div className="flex gap-10">
++          <div className="flex flex-col gap-2.5">
++            <span className="font-mono text-[11px] text-ink-soft">
+               Connect
+             </span>
+             <a
+               href={SOCIAL_LINKS.github}
+               target="_blank"
+               rel="noopener noreferrer"
+-              className="text-slate-600 hover:text-blue-400 transition-colors text-sm"
++              className="text-ink-soft hover:text-accent transition-colors text-[13.5px]"
+             >
+               GitHub
+             </a>
+@@ -31,43 +30,43 @@ export function Footer() {
+               href={SOCIAL_LINKS.linkedin}
+               target="_blank"
+               rel="noopener noreferrer"
+-              className="text-slate-600 hover:text-blue-400 transition-colors text-sm"
++              className="text-ink-soft hover:text-accent transition-colors text-[13.5px]"
+             >
+               LinkedIn
+             </a>
+             <a
+               href={`mailto:${SOCIAL_LINKS.email}`}
+-              className="text-slate-600 hover:text-blue-400 transition-colors text-sm"
++              className="text-ink-soft hover:text-accent transition-colors text-[13.5px]"
+             >
+               Email
+             </a>
+           </div>
+-          <div className="flex flex-col gap-3">
+-            <span className="text-slate-700 text-[10px] uppercase font-bold tracking-widest">
++          <div className="flex flex-col gap-2.5">
++            <span className="font-mono text-[11px] text-ink-soft">
+               General
+             </span>
+             <a
+               href={SOCIAL_LINKS.resume}
+               download
+-              className="text-slate-600 hover:text-blue-400 transition-colors text-sm"
++              className="text-ink-soft hover:text-accent transition-colors text-[13.5px]"
+             >
+               Resume
+             </a>
+             <Link
+               to="/#projects"
+-              className="text-slate-600 hover:text-blue-400 transition-colors text-sm"
++              className="text-ink-soft hover:text-accent transition-colors text-[13.5px]"
+             >
+               Projects
+             </Link>
+             <Link
+               to="/#experience"
+-              className="text-slate-600 hover:text-blue-400 transition-colors text-sm"
++              className="text-ink-soft hover:text-accent transition-colors text-[13.5px]"
+             >
+               Experience
+             </Link>
+           </div>
+         </div>
+-        <p className="text-slate-700 text-sm">
++        <p className="text-ink-soft text-[13.5px]">
+           © {new Date().getFullYear()} Jecinta Wangui.
+         </p>
+       </div>
+diff --git a/src/components/Experience.jsx b/src/components/Experience.jsx
+index 147c76b..766526d 100644
+--- a/src/components/Experience.jsx
++++ b/src/components/Experience.jsx
+@@ -1,85 +1,40 @@
+-import { useInView } from "../hooks";
+-import { Icon } from "./ui";
+ import { EXPERIENCE } from "../data";
+ 
+-const colorMap = {
+-  violet: {
+-    accent: "text-blue-400",
+-    border: "border-blue-500/30",
+-    hoverBorder: "hover:border-blue-500/30",
+-    dot: "bg-blue-400",
+-    badge: "bg-blue-500/10 text-blue-300 border-blue-500/20",
+-  },
+-  purple: {
+-    accent: "text-sky-300",
+-    border: "border-indigo-500/30",
+-    hoverBorder: "hover:border-indigo-500/30",
+-    dot: "bg-indigo-400",
+-    badge: "bg-indigo-500/10 text-sky-300 border-indigo-500/20",
+-  },
+-  pink: {
+-    accent: "text-sky-300",
+-    border: "border-sky-500/30",
+-    hoverBorder: "hover:border-sky-500/30",
+-    dot: "bg-sky-400",
+-    badge: "bg-sky-500/10 text-sky-300 border-sky-500/20",
+-  },
+-};
+-
+-function ExperienceCard({ job, index }) {
+-  const [ref, inView] = useInView();
+-  const c = colorMap[job.color];
++function ExperienceRow({ job, isLast }) {
+   return (
+-    <div
+-      ref={ref}
+-      className={`relative pl-8 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+-      style={{ transitionDelay: `${index * 120}ms` }}
+-    >
+-      {/* Timeline dot + line */}
+-      <div
+-        className={`absolute left-0 top-1.5 w-3 h-3 rounded-full ${c.dot} ring-4 ring-[#0b1325]`}
+-      />
+-      {index < EXPERIENCE.length - 1 && (
+-        <div className="absolute left-[5px] top-5 bottom-0 w-px bg-white/10" />
++    <div className="relative pl-8">
++      <div className="absolute left-0 top-[7px] w-2 h-2 rounded-full bg-accent" />
++      {!isLast && (
++        <div className="absolute left-[3.5px] top-4 bottom-[-2.5rem] w-px bg-border" />
+       )}
+ 
+-      <div
+-        className={`bg-white/[0.02] border border-white/[0.08] ${c.hoverBorder} hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.12)] rounded-2xl p-7 transition-all duration-300`}
+-      >
+-        {/* Header row */}
+-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
++      <div className="pb-10">
++        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
+           <div>
+-            <h3 className="text-lg font-bold font-['Poppins',sans-serif] text-white">
++            <h3 className="text-[17px] font-semibold text-ink">
+               {job.role}
+             </h3>
+-            <p className={`text-sm font-semibold ${c.accent} mt-0.5`}>
+-              {job.company}
+-            </p>
+-            <p className="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+-              <Icon name="location_on" className="!text-sm" />
+-              {job.location}
++            <p className="text-[14.5px] text-ink-soft mt-0.5">
++              {job.company} · {job.location}
+             </p>
+           </div>
+-          <div className="flex flex-col items-start sm:items-end gap-2 shrink-0">
+-            <span
+-              className={`text-xs font-bold px-3 py-1 rounded-full border ${c.badge}`}
+-            >
++          <div className="shrink-0 text-left sm:text-right">
++            <p className="font-mono text-[12.5px] text-ink-soft">
+               {job.period}
+-            </span>
+-            <span className="text-xs text-slate-500 font-medium">
++            </p>
++            <p className="font-mono text-[12px] text-ink-soft mt-0.5">
+               {job.stack}
+-            </span>
++            </p>
+           </div>
+         </div>
+ 
+-        {/* Bullets */}
+-        <ul className="space-y-2">
++        <ul className="space-y-2 mt-4">
+           {job.bullets.map((b, i) => (
+             <li
+               key={i}
+-              className="text-slate-400 text-sm flex gap-2.5 items-start leading-relaxed"
++              className="text-ink-soft text-[14.5px] flex gap-3 items-start leading-relaxed"
+             >
+-              <span className={`${c.accent} mt-1 shrink-0`}>▸</span>
++              <span className="text-accent mt-2 w-1 h-1 rounded-full bg-accent shrink-0" />
+               <span>{b}</span>
+             </li>
+           ))}
+@@ -93,18 +48,22 @@ export default function Experience() {
+   return (
+     <section
+       id="experience"
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-28"
++      className="w-full max-w-content mx-auto px-6 md:px-8 py-20 md:py-24"
+     >
+-      <h2 className="text-3xl font-extrabold font-['Poppins',sans-serif] text-white mb-4">
+-        Work Experience
++      <h2 className="text-[28px] md:text-[34px] font-semibold text-ink mb-3 tracking-[-0.01em]">
++        Experience
+       </h2>
+-      <p className="text-slate-400 text-sm mb-14 max-w-lg">
++      <p className="text-ink-soft text-[15px] mb-14 max-w-lg">
+         2+ years building production systems across healthcare, fintech, and
+         education.
+       </p>
+-      <div className="space-y-8">
++      <div>
+         {EXPERIENCE.map((job, i) => (
+-          <ExperienceCard key={job.id} job={job} index={i} />
++          <ExperienceRow
++            key={job.id}
++            job={job}
++            isLast={i === EXPERIENCE.length - 1}
++          />
+         ))}
+       </div>
+     </section>
+diff --git a/src/components/FeaturedProjects.jsx b/src/components/FeaturedProjects.jsx
+index 54764c5..6cd6672 100644
+--- a/src/components/FeaturedProjects.jsx
++++ b/src/components/FeaturedProjects.jsx
+@@ -9,31 +9,29 @@ export default function FeaturedProjects() {
+   return (
+     <section
+       id="projects"
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-28"
++      className="w-full max-w-content mx-auto px-6 md:px-8 py-20 md:py-24"
+     >
+       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+-        <div className="max-w-2xl">
+-          <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">
+-            Selected Work
+-          </p>
+-          <h2 className="text-3xl md:text-4xl font-extrabold font-['Poppins',sans-serif] text-white mb-3">
+-            Featured Projects
++        <div className="max-w-xl">
++          <h2 className="text-[28px] md:text-[34px] font-semibold text-ink mb-3 tracking-[-0.01em]">
++            Featured projects
+           </h2>
+-          <p className="text-slate-400 text-sm leading-relaxed">
+-            Two projects that best show full-stack range and real production impact. Open a case
+-            study for problem, architecture, and results — or see everything I've built.
++          <p className="text-ink-soft text-[15px] leading-relaxed">
++            Two projects that best show full-stack range. Open a case study
++            for the problem, architecture, and result — or see everything
++            I've built.
+           </p>
+         </div>
+         <Link
+           to="/projects"
+-          className="inline-flex items-center gap-2 text-sm font-bold text-blue-300 border border-blue-500/30 hover:border-blue-400 rounded-lg px-5 py-3 shrink-0 transition-colors whitespace-nowrap"
++          className="inline-flex items-center gap-2 text-[14.5px] font-medium text-ink border border-border hover:border-accent rounded-lg px-4 py-2.5 shrink-0 transition-colors whitespace-nowrap"
+         >
+-          View All Projects
+-          <Icon name="arrow_forward" className="!text-base" />
++          View all projects
++          <Icon name="arrow-right" size={15} />
+         </Link>
+       </div>
+ 
+-      <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
++      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
+         {featured.map((project, i) => (
+           <ProjectCard key={project.id} project={project} index={i} />
+         ))}
+diff --git a/src/components/Hero.jsx b/src/components/Hero.jsx
+index d0c1eeb..ecb90c3 100644
+--- a/src/components/Hero.jsx
++++ b/src/components/Hero.jsx
+@@ -1,103 +1,46 @@
+ import { Link } from "react-router-dom";
+-import { useInView } from "../hooks";
+-import { GlowOrb, Icon } from "./ui";
++import { Icon } from "./ui";
+ import { SOCIAL_LINKS } from "../data";
+ 
++const STACK = [
++  "Angular",
++  "React",
++  "TypeScript",
++  "Django REST",
++  "Spring Boot",
++  "PostgreSQL",
++  "MongoDB",
++];
++
+ export default function Hero() {
+-  const [ref, inView] = useInView();
+   return (
+-    <section
+-      ref={ref}
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 pt-36 pb-28 relative"
+-    >
+-      <GlowOrb className="top-0 right-1/4 w-96 h-96 bg-blue-600/20" />
+-      <GlowOrb className="bottom-0 left-1/4 w-64 h-64 bg-indigo-500/15" />
+-
+-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+-        {/* Text */}
+-        <div
+-          className={`space-y-8 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+-        >
+-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+-            <span className="text-xs font-semibold tracking-widest text-blue-300 uppercase">
+-              Building production software • Open to new opportunities
+-            </span>
+-          </div>
++    <section className="w-full max-w-content mx-auto px-6 md:px-8 pt-40 pb-20 md:pt-48 md:pb-28">
++      <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-16 items-start">
++        <div>
++          <p className="text-[14.5px] font-mono text-accent mb-6">
++            Open to new opportunities
++          </p>
+ 
+-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold font-['Poppins',sans-serif] leading-[1.08] tracking-tight text-white">
+-            Full-Stack{" "}
+-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">
+-              Software Engineer 
+-            </span>
++          <h1 className="text-[40px] sm:text-[48px] md:text-[58px] font-semibold leading-[1.08] tracking-[-0.02em] text-ink">
++            Jecinta Wangui
+           </h1>
+-
+-          <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
+-            I build full-stack applications from frontend to backend with a
+-            focus on clean architecture, intuitive user experiences, and
+-            scalable APIs. My experience spans healthcare and financial systems
+-            where reliability, performance, and maintainability matter.
++          <p className="mt-2 text-[22px] md:text-[26px] text-ink-soft font-medium">
++            Software Developer
+           </p>
+ 
+-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
+-            <span className="flex items-center gap-1.5">
+-              <Icon name="work" className="!text-base text-blue-400" />
+-              Shipping production software 
+-            </span>
+-
+-            <span className="flex items-center gap-1.5">
+-              <Icon name="location_on" className="!text-base text-blue-400" />
+-              Nairobi, Kenya
+-            </span>
+-
+-            <span className="flex items-center gap-1.5">
+-              <Icon name="schedule" className="!text-base text-blue-400" />
+-              2+ years building production applications
+-            </span>
+-          </div>
+-
+-          <div className="flex flex-wrap gap-2">
+-            {[
+-              "Angular",
+-              "React",
+-              "TypeScript",
+-              "Spring Boot",
+-              "Django REST",
+-              "PostgreSQL",
+-              "MongoDB",
+-            ].map((tech) => (
+-              <span
+-                key={tech}
+-                className="text-xs font-medium text-slate-300 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 hover:border-blue-500/40 transition-colors"
+-              >
+-                {tech}
+-              </span>
+-            ))}
+-          </div>
+-          <div className="space-y-3">
+-            <p className="text-xs uppercase tracking-[0.25em] text-slate-500 font-semibold">
+-              Recent Engineering Work
+-            </p>
++          <p className="mt-7 text-[17px] md:text-[18px] text-ink-soft leading-8 max-w-xl">
++            I build full-stack applications — Angular and React on the
++            frontend, Django REST Framework and Spring Boot on the backend,
++            with PostgreSQL and MongoDB for data. Most of my production work
++            so far has been in healthcare and fintech, based in Nairobi,
++            Kenya.
++          </p>
+ 
+-            <div className="flex flex-wrap gap-2">
+-              {[
+-                "Multitenant XAIDI Admin Dashboard",
+-                "Core Banking SACCO Platform",
+-                "Authentication & RBAC",
+-                "Reporting & Analytics",
+-                "Payment Integrations",
+-              ].map((project) => (
+-                <span
+-                  key={project}
+-                  className="px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-200"
+-                >
+-                  {project}
+-                </span>
+-              ))}
+-            </div>
+-          </div>
++          <p className="mt-6 font-mono text-[13.5px] text-ink-soft">
++            {STACK.join(" · ")}
++          </p>
+ 
+-          <div className="flex flex-wrap gap-4 pt-2">
++          <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-10">
+             <Link
+               to="#projects"
+               onClick={(e) => {
+@@ -106,70 +49,45 @@ export default function Hero() {
+                   .getElementById("projects")
+                   ?.scrollIntoView({ behavior: "smooth" });
+               }}
+-              className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-xl font-bold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
++              className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-lg text-[14.5px] font-medium transition-colors"
+             >
+-              Explore My Work
++              View projects
+             </Link>
+             <a
+               href={SOCIAL_LINKS.resume}
+               download
+-              className="bg-white/5 hover:bg-white/10 text-white px-7 py-3.5 rounded-xl font-bold text-base border border-white/10 transition-all inline-flex items-center gap-2 hover:border-blue-400/40"
++              className="inline-flex items-center gap-2 border border-border hover:border-accent text-ink px-5 py-2.5 rounded-lg text-[14.5px] font-medium transition-colors"
+             >
+-              <Icon name="download" className="!text-base" />
+-              Download Resume
++              <Icon name="download" size={15} />
++              Download CV
+             </a>
+-          </div>
+-
+-          {/* Social row */}
+-          <div className="flex items-center gap-5 pt-2">
+             <a
+               href={SOCIAL_LINKS.github}
+               target="_blank"
+               rel="noopener noreferrer"
+-              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
++              className="text-ink-soft hover:text-ink text-[14.5px] transition-colors"
+             >
+-              <Icon name="code" className="!text-lg" /> GitHub
++              GitHub
+             </a>
+-            <span className="w-px h-4 bg-white/10" />
+             <a
+               href={SOCIAL_LINKS.linkedin}
+               target="_blank"
+               rel="noopener noreferrer"
+-              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
++              className="text-ink-soft hover:text-ink text-[14.5px] transition-colors"
+             >
+-              <Icon name="person" className="!text-lg" /> LinkedIn
+-            </a>
+-            <span className="w-px h-4 bg-white/10" />
+-            <a
+-              href={`mailto:${SOCIAL_LINKS.email}`}
+-              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+-            >
+-              <Icon name="mail" className="!text-lg" /> Email
++              LinkedIn
+             </a>
+           </div>
+         </div>
+ 
+-        {/* Photo */}
+-        <div
+-          className={`relative w-full transition-all duration-700 delay-200 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+-        >
+-          <div className="w-full aspect-square rounded-2xl overflow-hidden bg-slate-800 border border-white/10 relative z-10">
++        <div className="w-full max-w-[340px] lg:max-w-none lg:justify-self-end">
++          <div className="aspect-[4/5] w-full rounded-xl overflow-hidden border border-border bg-muted">
+             <img
+               src="/assets/Jess.jpeg"
+-              alt="Jecinta Wangui — Full-Stack Developer"
+-              className="w-full h-full object-cover "
+-            />
+-            <div
+-              className="absolute inset-0 opacity-10"
+-              style={{
+-                backgroundImage:
+-                  "linear-gradient(rgba(59,130,246,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.5) 1px,transparent 1px)",
+-                backgroundSize: "40px 40px",
+-              }}
++              alt="Jecinta Wangui"
++              className="w-full h-full object-cover"
+             />
+           </div>
+-          <GlowOrb className="-top-10 -right-10 w-64 h-64 bg-blue-500/25" />
+-          <GlowOrb className="-bottom-10 -left-10 w-48 h-48 bg-indigo-500/20" />
+         </div>
+       </div>
+     </section>
+diff --git a/src/components/Metrics.jsx b/src/components/Metrics.jsx
+index 83074a2..e8776a7 100644
+--- a/src/components/Metrics.jsx
++++ b/src/components/Metrics.jsx
+@@ -1,79 +1,17 @@
+-import { useInView } from "../hooks";
+-import { Icon } from "./ui";
+ import { METRICS } from "../data";
+ 
+-function Stat({ m, index }) {
+-  const [ref, inView] = useInView();
+-
+-  return (
+-    <div
+-      ref={ref}
+-      className={`group rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/30 hover:bg-white/[0.04] ${
+-        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+-      }`}
+-      style={{ transitionDelay: `${index * 100}ms` }}
+-    >
+-      <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-blue-500/20">
+-        <Icon name={m.icon} className="text-blue-400 !text-xl" />
+-      </div>
+-
+-      <h3 className="text-xl font-bold text-white font-['Poppins',sans-serif] mb-3">
+-        {m.value}
+-      </h3>
+-
+-      <p className="text-slate-400 text-sm leading-7">{m.label}</p>
+-    </div>
+-  );
+-}
+-
+ export default function Metrics() {
+-  const [ref, inView] = useInView();
+-
+   return (
+-    <section
+-      ref={ref}
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-28"
+-    >
+-      <div
+-        className={`relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10 transition-all duration-700 ${
+-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+-        }`}
+-      >
+-        {/* Decorative Icon */}
+-        <div className="absolute top-6 right-6 opacity-[0.04] pointer-events-none">
+-          <Icon name="data_object" className="!text-7xl text-white" />
+-        </div>
+-
+-        {/* Heading */}
+-        <div className="max-w-2xl mb-10">
+-          <span className="text-blue-400 uppercase tracking-[0.25em] text-xs font-semibold">
+-            OVERVIEW
+-          </span>
+-
+-          <h2 className="mt-2 text-3xl font-bold font-['Poppins',sans-serif] text-white">
+-            Engineering at a Glance
+-          </h2>
+-
+-          <p className="mt-3 text-slate-400 leading-7">
+-            Building production software with a focus on scalable architecture,
+-            intuitive user experiences, and clean engineering practices.
+-          </p>
+-        </div>
+-
+-        {/* Cards */}
+-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+-          {METRICS.map((metric, index) => (
+-            <Stat key={metric.value} m={metric} index={index} />
+-          ))}
+-        </div>
+-
+-        {/* Philosophy */}
+-        <div className="mt-10 pt- border-t border-white/10">
+-          <p className="text-slate-500 italic max-w-3xl">
+-            Great software that is intuitive for users, maintainable for
+-            developers, and resilient enough to grow with the business.
+-          </p>
+-        </div>
++    <section className="w-full max-w-content mx-auto px-6 md:px-8 pb-20 md:pb-24">
++      <div className="border-t border-border grid grid-cols-1 md:grid-cols-4 md:divide-x md:divide-border">
++        {METRICS.map((m) => (
++          <div key={m.value} className="py-7 md:px-6 border-b md:border-b-0 border-border first:md:pl-0">
++            <p className="text-[19px] font-semibold text-ink mb-2">
++              {m.value}
++            </p>
++            <p className="text-[14.5px] text-ink-soft leading-6">{m.label}</p>
++          </div>
++        ))}
+       </div>
+     </section>
+   );
+diff --git a/src/components/Navbar.jsx b/src/components/Navbar.jsx
+index 6b59030..5c622bc 100644
+--- a/src/components/Navbar.jsx
++++ b/src/components/Navbar.jsx
+@@ -1,84 +1,110 @@
+ import { useState } from "react";
+ import { Link } from "react-router-dom";
+-import { useScrolled } from "../hooks";
++import { useScrolled, useTheme } from "../hooks";
+ import { NAV_LINKS, SOCIAL_LINKS } from "../data";
+ import { Icon } from "./ui";
+ 
+ export default function Navbar() {
+   const scrolled = useScrolled();
+   const [open, setOpen] = useState(false);
++  const [theme, toggleTheme] = useTheme();
+ 
+   return (
+     <nav
+-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-[#07080b]/90 backdrop-blur-2xl shadow-xl shadow-black/30" : "bg-transparent"}`}
++      className={`fixed top-0 w-full z-50 bg-bg/95 transition-shadow duration-200 ${
++        scrolled ? "border-b border-border" : "border-b border-transparent"
++      }`}
+     >
+-      <div className="flex justify-between items-center w-full max-w-screen-2xl mx-auto px-6 md:px-12 h-20">
++      <div className="flex justify-between items-center w-full max-w-content mx-auto px-6 md:px-8 h-[72px]">
+         <Link
+           to="/"
+-          className="text-xl font-bold tracking-tighter text-white font-['Poppins',sans-serif]"
++          className="text-[16px] font-semibold tracking-tight text-ink"
+         >
+-          Jess<span className="text-blue-400">.</span>
++          Jecinta Wangui
+         </Link>
+ 
+-        <div className="hidden md:flex items-center gap-10">
++        <div className="hidden md:flex items-center gap-8">
+           {NAV_LINKS.map((link) => (
+             <Link
+               key={link.href}
+               to={`/${link.href}`}
+-              className="relative text-slate-400 hover:text-white transition-colors text-sm font-medium tracking-wide after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full"
++              className="text-ink-soft hover:text-ink transition-colors text-[14.5px]"
+             >
+               {link.label}
+             </Link>
+           ))}
+         </div>
+ 
+-        <div className="hidden md:flex items-center gap-3">
++        <div className="hidden md:flex items-center gap-4">
++          <button
++            onClick={toggleTheme}
++            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
++            className="w-9 h-9 flex items-center justify-center rounded-md border border-border text-ink-soft hover:text-ink hover:border-accent transition-colors"
++          >
++            <Icon name={theme === "dark" ? "sun" : "moon"} size={16} />
++          </button>
+           <a
+             href={SOCIAL_LINKS.github}
+             target="_blank"
+             rel="noopener noreferrer"
+-            className="p-2 text-slate-400 hover:text-white transition-colors"
+-            title="GitHub"
++            className="text-ink-soft hover:text-ink transition-colors text-[14.5px]"
+           >
+-            <Icon name="code" className="!text-xl" />
++            GitHub
+           </a>
+           <a
+             href={SOCIAL_LINKS.resume}
+             download
+-            className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-all hover:scale-105 active:scale-95 flex items-center gap-2"
++            className="inline-flex items-center gap-1.5 text-[14.5px] font-medium text-ink border border-border hover:border-accent rounded-lg px-4 py-2 transition-colors"
+           >
+-            <Icon name="download" className="!text-sm" />
++            <Icon name="download" size={15} />
+             Resume
+           </a>
+         </div>
+ 
+-        <button
+-          onClick={() => setOpen((o) => !o)}
+-          className="md:hidden p-2 text-slate-300"
+-          aria-label="Toggle menu"
+-        >
+-          <Icon name={open ? "close" : "menu"} className="!text-2xl" />
+-        </button>
++        <div className="md:hidden flex items-center gap-2">
++          <button
++            onClick={toggleTheme}
++            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
++            className="w-9 h-9 flex items-center justify-center rounded-md border border-border text-ink-soft"
++          >
++            <Icon name={theme === "dark" ? "sun" : "moon"} size={16} />
++          </button>
++          <button
++            onClick={() => setOpen((o) => !o)}
++            className="w-9 h-9 flex items-center justify-center text-ink"
++            aria-label="Toggle menu"
++          >
++            <Icon name={open ? "close" : "menu"} size={20} />
++          </button>
++        </div>
+       </div>
+ 
+       {open && (
+-        <div className="md:hidden bg-[#07080b]/98 backdrop-blur-2xl border-t border-white/10 px-6 py-6 flex flex-col gap-5">
++        <div className="md:hidden bg-bg border-t border-border px-6 py-6 flex flex-col gap-5">
+           {NAV_LINKS.map((link) => (
+             <Link
+               key={link.href}
+               to={`/${link.href}`}
+               onClick={() => setOpen(false)}
+-              className="text-slate-300 hover:text-white transition-colors text-sm font-medium"
++              className="text-ink text-[15px]"
+             >
+               {link.label}
+             </Link>
+           ))}
++          <a
++            href={SOCIAL_LINKS.github}
++            target="_blank"
++            rel="noopener noreferrer"
++            className="text-ink text-[15px]"
++          >
++            GitHub
++          </a>
+           <a
+             href={SOCIAL_LINKS.resume}
+             download
+-            className="bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-semibold px-5 py-3 rounded-xl text-sm text-center flex items-center justify-center gap-2 transition-all"
++            className="inline-flex items-center justify-center gap-2 text-[14.5px] font-medium text-white bg-accent rounded-lg px-4 py-2.5"
+           >
+-            <Icon name="download" className="!text-sm" /> Resume
++            <Icon name="download" size={15} /> Resume
+           </a>
+         </div>
+       )}
+diff --git a/src/components/Philosophy.jsx b/src/components/Philosophy.jsx
+index ae9c7ee..5d2db93 100644
+--- a/src/components/Philosophy.jsx
++++ b/src/components/Philosophy.jsx
+@@ -1,38 +1,21 @@
+-import { useInView } from "../hooks";
+-import { Icon } from "./ui";
+ import { PHILOSOPHY } from "../data";
+ 
+-function Card({ item, index }) {
+-  const [ref, inView] = useInView();
+-  return (
+-    <div
+-      ref={ref}
+-      className={`bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/40 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.15)] rounded-2xl p-7 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+-      style={{ transitionDelay: `${(index % 3) * 100}ms` }}
+-    >
+-      <Icon name={item.icon} className="!text-2xl text-blue-400 mb-4" />
+-      <h3 className="text-white font-bold font-['Poppins',sans-serif] mb-2.5">
+-        {item.title}
+-      </h3>
+-      <p className="text-slate-400 text-sm leading-relaxed">{item.body}</p>
+-    </div>
+-  );
+-}
+-
+ export default function Philosophy() {
+   return (
+-    <section className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-28">
+-      <div className="max-w-2xl mb-14">
+-        <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">
+-          How I Work
+-        </p>
+-        <h2 className="text-3xl md:text-4xl font-extrabold font-['Poppins',sans-serif] text-white">
+-          Engineering philosophy
+-        </h2>
+-      </div>
+-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+-        {PHILOSOPHY.map((item, i) => (
+-          <Card key={item.title} item={item} index={i} />
++    <section className="w-full max-w-content mx-auto px-6 md:px-8 py-20 md:py-24">
++      <h2 className="text-[28px] md:text-[34px] font-semibold text-ink mb-12 tracking-[-0.01em]">
++        How I work
++      </h2>
++      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
++        {PHILOSOPHY.map((item) => (
++          <div key={item.title} className="border-t border-border pt-5">
++            <h3 className="text-ink font-semibold text-[15.5px] mb-2">
++              {item.title}
++            </h3>
++            <p className="text-ink-soft text-[14.5px] leading-relaxed">
++              {item.body}
++            </p>
++          </div>
+         ))}
+       </div>
+     </section>
+diff --git a/src/components/ProjectModal.jsx b/src/components/ProjectModal.jsx
+index 35e74cb..7f522f2 100644
+--- a/src/components/ProjectModal.jsx
++++ b/src/components/ProjectModal.jsx
+@@ -16,62 +16,61 @@ export default function ProjectModal({ project, onClose }) {
+ 
+   return (
+     <div
+-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
++      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+       onClick={(e) => {
+         if (e.target === e.currentTarget) onClose();
+       }}
+     >
+-      <div className="bg-[#0b1325] border border-white/10 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+-        {/* Header */}
+-        <div className="sticky top-0 bg-[#0b1325]/95 backdrop-blur border-b border-white/10 px-8 py-5 flex justify-between items-center z-10">
++      <div className="bg-surface border border-border rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
++        <div className="sticky top-0 bg-surface border-b border-border px-7 py-5 flex justify-between items-center z-10">
+           <div>
+-            <h4 className="text-xl font-bold font-['Poppins',sans-serif] text-white">
++            <h4 className="text-[19px] font-semibold text-ink">
+               {project.title}
+             </h4>
+-            <p className="text-xs text-blue-400 font-semibold tracking-widest uppercase mt-0.5">
++            <p className="font-mono text-[12.5px] text-ink-soft mt-0.5">
+               {project.subtitle}
+             </p>
+           </div>
+           <button
+             onClick={onClose}
+-            className="p-2 hover:bg-white/10 rounded-full transition-colors text-slate-400 hover:text-white"
++            className="p-2 rounded-md text-ink-soft hover:text-ink hover:bg-muted transition-colors"
+             aria-label="Close"
+           >
+-            <Icon name="close" />
++            <Icon name="close" size={18} />
+           </button>
+         </div>
+ 
+-        <div className="p-8 space-y-10">
++        <div className="p-7 space-y-9">
+           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+             <div className="lg:col-span-2 space-y-6">
+               <div>
+-                <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
+-                  Project Overview
++                <h5 className="font-mono text-[12.5px] text-ink-soft mb-2.5">
++                  Overview
+                 </h5>
+-                <p className="text-slate-400 leading-relaxed text-sm">
++                <p className="text-ink-soft leading-relaxed text-[14.5px]">
+                   {project.description}
+                 </p>
+               </div>
+               <div>
+-                <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
+-                  Key Result
++                <h5 className="font-mono text-[12.5px] text-ink-soft mb-2.5">
++                  Result
+                 </h5>
+-                <p className="text-blue-200 font-medium text-sm bg-blue-500/10 border border-blue-500/20 rounded-xl px-5 py-4">
++                <p className="text-ink text-[14.5px] leading-relaxed border-l-2 border-accent pl-4">
+                   {project.result}
+                 </p>
+               </div>
+               {project.keyFeatures && (
+                 <div>
+-                  <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
+-                    Key Features
++                  <h5 className="font-mono text-[12.5px] text-ink-soft mb-2.5">
++                    Key features
+                   </h5>
+                   <ul className="space-y-2">
+                     {project.keyFeatures.map((f, i) => (
+                       <li
+                         key={i}
+-                        className="text-slate-400 text-sm flex gap-2 items-start"
++                        className="text-ink-soft text-[14.5px] flex gap-2.5 items-start leading-relaxed"
+                       >
+-                        <span className="text-blue-400 mt-1">✓</span>
++                        <span className="text-accent mt-1 shrink-0">·</span>
+                         <span>{f}</span>
+                       </li>
+                     ))}
+@@ -80,20 +79,20 @@ export default function ProjectModal({ project, onClose }) {
+               )}
+             </div>
+ 
+-            <div className="bg-white/[0.02] rounded-xl p-6 border border-white/[0.08] space-y-5 h-fit">
+-              <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400">
++            <div className="bg-muted rounded-lg p-5 border border-border space-y-5 h-fit">
++              <h5 className="font-mono text-[12.5px] text-ink-soft">
+                 Architecture
+               </h5>
+               {Object.entries(project.architecture).map(([k, v]) => (
+                 <div key={k}>
+-                  <span className="text-xs text-slate-500 font-semibold block mb-1">
++                  <span className="text-[11.5px] text-ink-soft block mb-1">
+                     {k}
+                   </span>
+-                  <p className="text-sm font-medium text-white">{v}</p>
++                  <p className="text-[13.5px] text-ink leading-relaxed">{v}</p>
+                 </div>
+               ))}
+-              <div className="pt-6 border-t border-white/10 space-y-2">
+-                <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
++              <div className="pt-5 border-t border-border space-y-2.5">
++                <h5 className="font-mono text-[12.5px] text-ink-soft mb-2">
+                   Code
+                 </h5>
+                 {project.gitFrontend && (
+@@ -101,9 +100,9 @@ export default function ProjectModal({ project, onClose }) {
+                     href={project.gitFrontend}
+                     target="_blank"
+                     rel="noopener noreferrer"
+-                    className="flex items-center gap-2 text-sm text-slate-300 hover:text-blue-400 transition-colors"
++                    className="flex items-center gap-2 text-[13.5px] text-ink-soft hover:text-accent transition-colors"
+                   >
+-                    <Icon name="code" className="!text-base" /> Frontend Repo
++                    <Icon name="github" size={14} /> Frontend repo
+                   </a>
+                 )}
+                 {project.gitBackend && (
+@@ -111,9 +110,9 @@ export default function ProjectModal({ project, onClose }) {
+                     href={project.gitBackend}
+                     target="_blank"
+                     rel="noopener noreferrer"
+-                    className="flex items-center gap-2 text-sm text-slate-300 hover:text-blue-400 transition-colors"
++                    className="flex items-center gap-2 text-[13.5px] text-ink-soft hover:text-accent transition-colors"
+                   >
+-                    <Icon name="storage" className="!text-base" /> Backend Repo
++                    <Icon name="github" size={14} /> Backend repo
+                   </a>
+                 )}
+               </div>
+@@ -122,23 +121,20 @@ export default function ProjectModal({ project, onClose }) {
+ 
+           {project.gallery?.length > 0 && (
+             <div>
+-              <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6">
+-                Interface Gallery
++              <h5 className="font-mono text-[12.5px] text-ink-soft mb-5">
++                Interface gallery
+               </h5>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 {project.gallery.map((img, i) => (
+-                  <div
+-                    key={i}
+-                    className="bg-black/30 border border-white/10 rounded-xl p-2 space-y-2"
+-                  >
+-                    <div className="rounded-lg overflow-hidden">
++                  <div key={i} className="space-y-2">
++                    <div className="rounded-lg overflow-hidden border border-border">
+                       <img
+                         src={img.src}
+                         alt={img.caption}
+-                        className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300"
++                        className="w-full h-auto object-cover"
+                       />
+                     </div>
+-                    <p className="text-xs text-center text-slate-500 font-medium px-2 pb-1">
++                    <p className="text-[12.5px] text-ink-soft px-1">
+                       {img.caption}
+                     </p>
+                   </div>
+diff --git a/src/components/Projects.jsx b/src/components/Projects.jsx
+index c381518..bd83c33 100644
+--- a/src/components/Projects.jsx
++++ b/src/components/Projects.jsx
+@@ -1,100 +1,79 @@
+ import { useState } from "react";
+-import { useInView } from "../hooks";
+ import { Tag, Icon } from "./ui";
+ import ProjectModal from "./ProjectModal";
+ 
+-export default function ProjectCard({ project, index }) {
+-  const [ref, inView] = useInView();
++export default function ProjectCard({ project }) {
+   const [modalOpen, setModalOpen] = useState(false);
+   const [imageError, setImageError] = useState(false);
+ 
+-  const handleImageError = () => {
+-    setImageError(true);
+-  };
+-
+   return (
+     <>
+-      <div
+-        ref={ref}
+-        className={`group flex flex-col transition-all duration-700 ${
+-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+-        }`}
+-        style={{ transitionDelay: `${index * 150}ms` }}
+-      >
+-        {/* Screenshot */}
+-        <div className="aspect-video rounded-xl bg-slate-800 overflow-hidden mb-7 border border-white/10 relative">
++      <div className="group flex flex-col">
++        <div className="aspect-video rounded-lg bg-muted overflow-hidden mb-6 border border-border relative">
+           {!imageError && project?.screenshot ? (
+             <img
+               src={project?.screenshot}
+               alt={project.title}
+-              onError={handleImageError}
+-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
++              onError={() => setImageError(true)}
++              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+             />
+           ) : (
+-            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-700 to-slate-800">
+-              <Icon name="image_not_supported" className="!text-5xl text-slate-500 mb-2" />
+-              <p className="text-slate-500 text-xs font-medium">No screenshot available</p>
++            <div className="w-full h-full flex items-center justify-center">
++              <p className="text-ink-soft text-[13px]">No screenshot available</p>
+             </div>
+           )}
+-          <div className="absolute inset-0 bg-gradient-to-t from-[#050b1a] via-transparent to-transparent opacity-60" />
+           {!project?.featured && (
+-            <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur rounded-full text-xs font-bold text-slate-300 border border-white/10">
+-              Side Project
++            <div className="absolute top-3 right-3 px-2.5 py-1 bg-bg/90 border border-border rounded-md text-[11.5px] font-mono text-ink-soft">
++              Side project
+             </div>
+           )}
+         </div>
+ 
+-        {/* Content */}
+         <div className="flex flex-col flex-1">
+-          <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">
++          <p className="font-mono text-[12.5px] text-ink-soft mb-2">
+             {project?.subtitle}
+           </p>
+-          <h3 className="text-xl font-bold font-['Poppins',sans-serif] text-white mb-3">
++          <h3 className="text-[19px] font-semibold text-ink mb-3">
+             {project?.title}
+           </h3>
+-          <p className="text-slate-400 text-sm leading-relaxed mb-3 line-clamp-4">
++          <p className="text-ink-soft text-[14.5px] leading-relaxed mb-3 line-clamp-4">
+             {project?.description}
+           </p>
+-          <p className="text-blue-300 text-sm font-medium mb-5">
+-            → {project?.result}
+-          </p>
++          <p className="text-ink text-[14.5px] mb-5">{project?.result}</p>
+ 
+-          {/* Tags */}
+           <div className="flex flex-wrap gap-2 mb-6">
+             {project?.tags.map((t) => (
+               <Tag key={t}>{t}</Tag>
+             ))}
+           </div>
+ 
+-          {/* Action Buttons */}
+           <div className="flex flex-wrap items-center gap-3 mt-auto">
+             {project?.liveUrl && (
+               <a
+                 href={project?.liveUrl}
+                 target="_blank"
+                 rel="noopener noreferrer"
+-                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-all hover:scale-[1.02] active:scale-95"
++                className="inline-flex items-center gap-1.5 px-4 py-2 text-[13.5px] font-medium text-white bg-accent hover:bg-accent-hover rounded-lg transition-colors"
+               >
+-                <Icon name="open_in_new" className="!text-base" />
+-                Live Link
++                <Icon name="external" size={14} />
++                Live link
+               </a>
+             )}
+             <button
+               onClick={() => setModalOpen(true)}
+-              className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-blue-300 border border-blue-500/30 hover:border-blue-400 rounded-lg bg-transparent transition-colors"
++              className="inline-flex items-center gap-1.5 px-4 py-2 text-[13.5px] font-medium text-ink border border-border hover:border-accent rounded-lg bg-transparent transition-colors"
+             >
+-              <Icon name="visibility" className="!text-base" />
+-              Case Study
++              Case study
+             </button>
+             {project?.gitFrontend && (
+               <a
+                 href={project?.gitFrontend}
+                 target="_blank"
+                 rel="noopener noreferrer"
+-                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-slate-300 border border-white/10 hover:border-white/30 rounded-lg bg-transparent transition-colors"
+-                title="Frontend Repository"
++                className="inline-flex items-center gap-1.5 px-3 py-2 text-ink-soft hover:text-ink border border-border hover:border-accent rounded-lg bg-transparent transition-colors"
++                title="Frontend repository"
+               >
+-                <Icon name="code" className="!text-base" />
++                <Icon name="github" size={15} />
+               </a>
+             )}
+             {project?.gitBackend && !project?.gitFrontend && (
+@@ -102,20 +81,19 @@ export default function ProjectCard({ project, index }) {
+                 href={project?.gitBackend}
+                 target="_blank"
+                 rel="noopener noreferrer"
+-                className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-slate-300 border border-white/10 hover:border-white/30 rounded-lg bg-transparent transition-colors"
+-                title="Backend Repository"
++                className="inline-flex items-center gap-1.5 px-3 py-2 text-ink-soft hover:text-ink border border-border hover:border-accent rounded-lg bg-transparent transition-colors"
++                title="Backend repository"
+               >
+-                <Icon name="storage" className="!text-base" />
++                <Icon name="github" size={15} />
+               </a>
+             )}
+           </div>
+         </div>
+       </div>
+ 
+-      {/* Project Modal */}
+       {modalOpen && (
+         <ProjectModal project={project} onClose={() => setModalOpen(false)} />
+       )}
+     </>
+   );
+-}
+\ No newline at end of file
++}
+diff --git a/src/components/Skills.jsx b/src/components/Skills.jsx
+index 7506715..4a96176 100644
+--- a/src/components/Skills.jsx
++++ b/src/components/Skills.jsx
+@@ -1,70 +1,27 @@
+-import { useInView } from "../hooks";
+-import { Tag, Icon } from "./ui";
++import { Tag } from "./ui";
+ import { SKILLS } from "../data";
+ 
+-const colorMap = {
+-  violet: {
+-    icon: "text-blue-400",
+-    bg: "bg-blue-500/10",
+-    border: "hover:border-blue-400/30",
+-  },
+-  purple: {
+-    icon: "text-sky-300",
+-    bg: "bg-indigo-500/10",
+-    border: "hover:border-indigo-400/30",
+-  },
+-  pink: {
+-    icon: "text-sky-300",
+-    bg: "bg-sky-500/10",
+-    border: "hover:border-sky-400/30",
+-  },
+-  indigo: {
+-    icon: "text-indigo-300",
+-    bg: "bg-indigo-500/10",
+-    border: "hover:border-indigo-400/30",
+-  },
+-};
+-
+-function SkillCard({ name, data, delay = 0 }) {
+-  const [ref, inView] = useInView();
+-  const c = colorMap[data.color];
+-  return (
+-    <div
+-      ref={ref}
+-      className={`bg-white/[0.02] border border-white/[0.08] ${c.border} hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.12)] rounded-2xl p-7 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+-      style={{ transitionDelay: `${delay}ms` }}
+-    >
+-      <div
+-        className={`w-11 h-11 ${c.bg} rounded-xl flex items-center justify-center mb-5`}
+-      >
+-        <Icon name={data.icon} className={`!text-xl ${c.icon}`} />
+-      </div>
+-      <h3 className="text-lg font-bold font-['Poppins',sans-serif] text-white mb-5">
+-        {name}
+-      </h3>
+-      <div className="flex flex-wrap gap-2">
+-        {data.tags.map((t) => (
+-          <Tag key={t} variant="skill">
+-            {t}
+-          </Tag>
+-        ))}
+-      </div>
+-    </div>
+-  );
+-}
+-
+ export default function Skills() {
+   return (
+     <section
+       id="skills"
+-      className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-28"
++      className="w-full max-w-content mx-auto px-6 md:px-8 py-20 md:py-24"
+     >
+-      <h2 className="text-3xl font-extrabold font-['Poppins',sans-serif] text-white mb-12">
+-        Technical Toolkit
++      <h2 className="text-[28px] md:text-[34px] font-semibold text-ink mb-12 tracking-[-0.01em]">
++        Skills
+       </h2>
+-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+-        {Object.entries(SKILLS).map(([name, data], i) => (
+-          <SkillCard key={name} name={name} data={data} delay={i * 80} />
++      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
++        {Object.entries(SKILLS).map(([name, data]) => (
++          <div key={name} className="border-t border-border pt-5">
++            <h3 className="text-[15px] font-semibold text-ink mb-3">
++              {name}
++            </h3>
++            <div className="flex flex-wrap gap-2">
++              {data.tags.map((t) => (
++                <Tag key={t}>{t}</Tag>
++              ))}
++            </div>
++          </div>
+         ))}
+       </div>
+     </section>
+diff --git a/src/components/ui.jsx b/src/components/ui.jsx
+index 47a7d38..d61b8bf 100644
+--- a/src/components/ui.jsx
++++ b/src/components/ui.jsx
+@@ -1,56 +1,82 @@
+-export function Tag({ children, variant = "default" }) {
+-  const base =
+-    "text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md";
+-  const variants = {
+-    default: "text-blue-300 bg-white/5 border border-white/10",
+-    skill:
+-      "text-slate-300 bg-white/5 border border-white/10 px-4 py-2 rounded-full text-sm normal-case font-medium tracking-normal",
+-  };
+-  return <span className={`${base} ${variants[variant]}`}>{children}</span>;
+-}
++// Small, restrained icon set. Used only where an icon communicates
++// something a label alone wouldn't (external link, close, theme state) —
++// not as decoration next to every heading.
++const PATHS = {
++  "arrow-right": "M5 12h14M13 6l6 6-6 6",
++  "arrow-left": "M19 12H5M11 18l-6-6 6-6",
++  external: "M7 17L17 7M8 7h9v9",
++  close: "M6 6l12 12M18 6L6 18",
++  menu: "M4 7h16M4 12h16M4 17h16",
++  download: "M12 4v11m0 0l-4-4m4 4l4-4M5 19h14",
++  mail: "M4 6h16v12H4z M4 7l8 6 8-6",
++  github:
++    "M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.22-3.37-1.22-.46-1.2-1.11-1.52-1.11-1.52-.9-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.15-4.56-5.11 0-1.13.39-2.05 1.03-2.77-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.06a9.3 9.3 0 0 1 5 0c1.9-1.34 2.75-1.06 2.75-1.06.55 1.42.2 2.47.1 2.73.64.72 1.03 1.64 1.03 2.77 0 3.97-2.34 4.84-4.57 5.1.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z",
++  linkedin:
++    "M4.5 3.5A1.75 1.75 0 1 0 4.49 7 1.75 1.75 0 0 0 4.5 3.5zM3 9h3v12H3zM9.5 9H12.4v1.64h.04c.4-.76 1.4-1.64 2.9-1.64 3.1 0 3.66 2.04 3.66 4.7V21h-3v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-3z",
++  location: "M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
++  sun: "M12 3v2m0 14v2m9-9h-2M5 12H3m14.95 6.95l-1.41-1.41M6.46 6.46 5.05 5.05m13.9 0-1.41 1.41M6.46 17.54l-1.41 1.41M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
++  moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
++  check: "M20 6L9 17l-5-5",
++};
+ 
+-export function Icon({ name, className = "" }) {
++export function Icon({ name, className = "", size = 18, strokeWidth = 1.75 }) {
++  const d = PATHS[name];
++  if (!d) return null;
+   return (
+-    <span
+-      className={`material-symbols-outlined select-none ${className}`}
+-      style={{
+-        fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24",
+-      }}
++    <svg
++      viewBox="0 0 24 24"
++      width={size}
++      height={size}
++      fill="none"
++      stroke="currentColor"
++      strokeWidth={strokeWidth}
++      strokeLinecap="round"
++      strokeLinejoin="round"
++      className={className}
++      aria-hidden="true"
+     >
+-      {name}
+-    </span>
++      <path d={d} />
++    </svg>
+   );
+ }
+ 
+-export function Eyebrow({ children }) {
++export function Tag({ children }) {
+   return (
+-    <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">
+-      <span className="h-px w-6 bg-blue-400/50" />
++    <span className="font-mono text-[12.5px] text-ink-soft border border-border rounded-md px-2 py-1 leading-none">
+       {children}
+-    </p>
++    </span>
+   );
+ }
+ 
+-export function Card({
+-  children,
+-  className = "",
+-  elevated = false,
+-  as: Tag = "div",
+-  ...props
+-}) {
++export function SectionHeading({ eyebrow, title, description, className = "" }) {
+   return (
+-    <Tag
+-      className={`bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/40 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.15)] transition-all duration-300 ${elevated ? "rounded-3xl" : "rounded-2xl"} ${className}`}
+-      {...props}
+-    >
+-      {children}
+-    </Tag>
++    <div className={`max-w-2xl mb-12 ${className}`}>
++      {eyebrow && (
++        <p className="font-mono text-[13px] text-ink-soft mb-3">{eyebrow}</p>
++      )}
++      <h2 className="text-[28px] md:text-[34px] font-semibold text-ink leading-tight tracking-[-0.01em]">
++        {title}
++      </h2>
++      {description && (
++        <p className="mt-4 text-[15.5px] text-ink-soft leading-7 max-w-xl">
++          {description}
++        </p>
++      )}
++    </div>
+   );
+ }
+-export function GlowOrb({ className }) {
++
++export function Button({ as: Tag = "a", variant = "primary", className = "", children, ...props }) {
++  const base =
++    "inline-flex items-center justify-center gap-2 text-[14.5px] font-medium px-5 py-2.5 rounded-lg border transition-colors duration-150";
++  const variants = {
++    primary:
++      "bg-accent border-accent text-white hover:bg-accent-hover hover:border-accent-hover",
++    secondary: "bg-transparent border-border text-ink hover:border-accent",
++  };
+   return (
+-    <div
+-      className={`absolute rounded-full blur-[120px] pointer-events-none ${className}`}
+-    />
++    <Tag className={`${base} ${variants[variant]} ${className}`} {...props}>
++      {children}
++    </Tag>
+   );
+ }
+diff --git a/src/hooks/index.js b/src/hooks/index.js
+index 587fb1f..8175106 100644
+--- a/src/hooks/index.js
++++ b/src/hooks/index.js
+@@ -10,6 +10,25 @@ export function useScrolled(threshold = 20) {
+   return scrolled;
+ }
+ 
++export function useTheme() {
++  const [theme, setTheme] = useState(
++    () => document.documentElement.getAttribute("data-theme") || "light",
++  );
++
++  useEffect(() => {
++    document.documentElement.setAttribute("data-theme", theme);
++    try {
++      localStorage.setItem("theme", theme);
++    } catch (e) {
++      /* ignore */
++    }
++  }, [theme]);
++
++  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
++
++  return [theme, toggle];
++}
++
+ export function useInView(options = {}) {
+   const ref = useRef(null);
+   const [inView, setInView] = useState(false);
+diff --git a/src/index.css b/src/index.css
+index 07ff460..e6df28c 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -10,12 +10,35 @@
+   padding: 0;
+ }
+ 
++:root {
++  --bg: #fafaf8;
++  --text: #171717;
++  --text-secondary: #5f6368;
++  --border: #e5e5e2;
++  --card: #ffffff;
++  --muted: #f3f3f0;
++  --accent: #2563eb;
++  --accent-hover: #1d4ed8;
++  color-scheme: light;
++}
++
++:root[data-theme="dark"] {
++  --bg: #111111;
++  --text: #f5f5f3;
++  --text-secondary: #a3a3a0;
++  --border: #2a2a28;
++  --card: #181818;
++  --muted: #20201e;
++  --accent: #60a5fa;
++  --accent-hover: #93c5fd;
++  color-scheme: dark;
++}
++
+ html,
+ body,
+ #root {
+   width: 100%;
+   min-height: 100vh;
+-  /* Remove any flex centering the Vite default adds */
+   display: block;
+ }
+ 
+@@ -23,30 +46,43 @@ html {
+   scroll-behavior: smooth;
+ }
+ 
+-/* Visible keyboard focus state — the previous build had none, which fails
+-   the "Accessibility compliant" requirement from the original brief. */
++body {
++  background-color: var(--bg);
++  color: var(--text);
++  font-family:
++    "Inter",
++    -apple-system,
++    "Segoe UI",
++    Helvetica,
++    Arial,
++    sans-serif;
++  transition:
++    background-color 0.18s ease,
++    color 0.18s ease;
++}
++
++::selection {
++  background: var(--accent);
++  color: var(--bg);
++}
++
+ a:focus-visible,
+ button:focus-visible,
+ input:focus-visible,
+-textarea:focus-visible {
+-  outline: 2px solid #60a5fa;
++textarea:focus-visible,
++[tabindex]:focus-visible {
++  outline: 2px solid var(--accent);
+   outline-offset: 3px;
+-  border-radius: 6px;
+-}
+-
+-/* Barely-visible grain so the flat charcoal background reads as an
+-   engineered surface instead of a plain CSS fill. Opacity is intentionally
+-   tiny — this should never be consciously noticed, only felt. */
+-.bg-grain {
+-  position: relative;
+-}
+-.bg-grain::before {
+-  content: "";
+-  position: fixed;
+-  inset: 0;
+-  z-index: 0;
+-  pointer-events: none;
+-  opacity: 0.035;
+-  mix-blend-mode: overlay;
+-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+-}
+\ No newline at end of file
++  border-radius: 4px;
++}
++
++@media (prefers-reduced-motion: reduce) {
++  *,
++  *::before,
++  *::after {
++    animation-duration: 0.001ms !important;
++    animation-iteration-count: 1 !important;
++    transition-duration: 0.001ms !important;
++    scroll-behavior: auto !important;
++  }
++}
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index c1870b3..930b27c 100644
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -1,7 +1,6 @@
+ import { useEffect } from "react";
+ import { useLocation } from "react-router-dom";
+ import Navbar from "../components/Navbar";
+-import ScrollProgress from "../components/ScrollProgress";
+ import Hero from "../components/Hero";
+ import Metrics from "../components/Metrics";
+ import About from "../components/About";
+@@ -27,36 +26,16 @@ export default function Home() {
+   }, [hash]);
+ 
+   return (
+-    <div
+-      className="min-h-screen w-full bg-grain"
+-      style={{
+-        backgroundColor: "#07080b",
+-        color: "#fbfbffff",
+-        fontFamily: "'DM Sans', sans-serif",
+-      }}
+-    >
+-      <div
+-        className="fixed inset-x-0 top-0 h-[560px] pointer-events-none z-0"
+-        style={{
+-          background:
+-            "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59,130,246,0.10), transparent 70%)",
+-        }}
+-      />
+-      <ScrollProgress />
++    <div className="min-h-screen w-full bg-bg text-ink">
+       <Navbar />
+-      <main className="relative z-10 w-full overflow-x-hidden">
++      <main className="w-full overflow-x-hidden">
+         <Hero />
+         <Metrics />
+         <About />
+         <Experience />
+         <Skills />
+         <Projects />
+-        {/* <Architecture /> */}
+         <Philosophy />
+-      
+-       {/*  <GithubActivity />
+-        <Blog />
+-        <Testimonials /> */}
+         <Contact />
+       </main>
+       <Footer />
+diff --git a/src/pages/ProjectsPage.jsx b/src/pages/ProjectsPage.jsx
+index 043c25a..dce339e 100644
+--- a/src/pages/ProjectsPage.jsx
++++ b/src/pages/ProjectsPage.jsx
+@@ -3,7 +3,7 @@ import { useEffect } from "react";
+ import ProjectCard from "../components/Projects";
+ import Navbar from "../components/Navbar";
+ import { Footer } from "../components/CtaFooter";
+-import { Icon, Eyebrow } from "../components/ui";
++import { Icon } from "../components/ui";
+ import { PROJECTS } from "../data";
+ 
+ export default function ProjectsPage() {
+@@ -12,41 +12,26 @@ export default function ProjectsPage() {
+   }, []);
+ 
+   return (
+-    <div
+-      className="min-h-screen w-full bg-grain"
+-      style={{
+-        backgroundColor: "#07080b",
+-        color: "#fbfbffff",
+-        fontFamily: "'DM Sans', sans-serif",
+-      }}
+-    >
+-      <div
+-        className="fixed inset-x-0 top-0 h-[560px] pointer-events-none z-0"
+-        style={{
+-          background:
+-            "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59,130,246,0.10), transparent 70%)",
+-        }}
+-      />
++    <div className="min-h-screen w-full bg-bg text-ink">
+       <Navbar />
+-      <main className="relative z-10 w-full overflow-x-hidden pt-36 pb-20">
+-        <div className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-14">
++      <main className="w-full overflow-x-hidden pt-32 pb-24">
++        <div className="w-full max-w-content mx-auto px-6 md:px-8 mb-14">
+           <Link
+             to="/"
+-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-8"
++            className="inline-flex items-center gap-2 text-[14px] text-ink-soft hover:text-ink transition-colors mb-8"
+           >
+-            <Icon name="arrow_back" className="!text-base" /> Back to home
++            <Icon name="arrow-left" size={15} /> Back to home
+           </Link>
+-          <Eyebrow>Everything I've Built</Eyebrow>
+-          <h1 className="text-3xl md:text-4xl font-extrabold font-['Poppins',sans-serif] text-white mb-3">
+-            All Projects
++          <h1 className="text-[28px] md:text-[34px] font-semibold text-ink mb-3 tracking-[-0.01em]">
++            All projects
+           </h1>
+-          <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">
+-            Production work, self-directed builds, and technical assessments —{" "}
+-            {PROJECTS.length} projects across the full stack.
++          <p className="text-ink-soft text-[15px] leading-relaxed max-w-xl">
++            Production work, self-directed builds, and one platform
++            migration — {PROJECTS.length} projects across the stack.
+           </p>
+         </div>
+ 
+-        <div className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-14">
++        <div className="w-full max-w-content mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
+           {PROJECTS.map((project, i) => (
+             <ProjectCard key={project.id} project={project} index={i} />
+           ))}
+diff --git a/tailwind.config.js b/tailwind.config.js
+index 0350392..b18b55a 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -1,5 +1,39 @@
+ export default {
+   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+-  theme: { extend: {} },
++  darkMode: ["selector", '[data-theme="dark"]'],
++  theme: {
++    extend: {
++      colors: {
++        bg: "var(--bg)",
++        surface: "var(--card)",
++        muted: "var(--muted)",
++        border: "var(--border)",
++        ink: "var(--text)",
++        "ink-soft": "var(--text-secondary)",
++        accent: "var(--accent)",
++        "accent-hover": "var(--accent-hover)",
++      },
++      fontFamily: {
++        sans: [
++          "Inter",
++          "-apple-system",
++          "Segoe UI",
++          "Helvetica Neue",
++          "Arial",
++          "sans-serif",
++        ],
++        mono: [
++          "IBM Plex Mono",
++          "ui-monospace",
++          "SFMono-Regular",
++          "Menlo",
++          "monospace",
++        ],
++      },
++      maxWidth: {
++        content: "1120px",
++      },
++    },
++  },
+   plugins: [],
+ };

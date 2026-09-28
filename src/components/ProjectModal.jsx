@@ -16,62 +16,61 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-[#0b1325] border border-white/10 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-        {/* Header */}
-        <div className="sticky top-0 bg-[#0b1325]/95 backdrop-blur border-b border-white/10 px-8 py-5 flex justify-between items-center z-10">
+      <div className="bg-surface border border-border rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-surface border-b border-border px-7 py-5 flex justify-between items-center z-10">
           <div>
-            <h4 className="text-xl font-bold font-['Poppins',sans-serif] text-white">
+            <h4 className="text-[19px] font-semibold text-ink">
               {project.title}
             </h4>
-            <p className="text-xs text-blue-400 font-semibold tracking-widest uppercase mt-0.5">
+            <p className="font-mono text-[12.5px] text-ink-soft mt-0.5">
               {project.subtitle}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/10 rounded-full transition-colors text-slate-400 hover:text-white"
+            className="p-2 rounded-md text-ink-soft hover:text-ink hover:bg-muted transition-colors"
             aria-label="Close"
           >
-            <Icon name="close" />
+            <Icon name="close" size={18} />
           </button>
         </div>
 
-        <div className="p-8 space-y-10">
+        <div className="p-7 space-y-9">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
-                  Project Overview
+                <h5 className="font-mono text-[12.5px] text-ink-soft mb-2.5">
+                  Overview
                 </h5>
-                <p className="text-slate-400 leading-relaxed text-sm">
+                <p className="text-ink-soft leading-relaxed text-[14.5px]">
                   {project.description}
                 </p>
               </div>
               <div>
-                <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
-                  Key Result
+                <h5 className="font-mono text-[12.5px] text-ink-soft mb-2.5">
+                  Result
                 </h5>
-                <p className="text-blue-200 font-medium text-sm bg-blue-500/10 border border-blue-500/20 rounded-xl px-5 py-4">
+                <p className="text-ink text-[14.5px] leading-relaxed border-l-2 border-accent pl-4">
                   {project.result}
                 </p>
               </div>
               {project.keyFeatures && (
                 <div>
-                  <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
-                    Key Features
+                  <h5 className="font-mono text-[12.5px] text-ink-soft mb-2.5">
+                    Key features
                   </h5>
                   <ul className="space-y-2">
                     {project.keyFeatures.map((f, i) => (
                       <li
                         key={i}
-                        className="text-slate-400 text-sm flex gap-2 items-start"
+                        className="text-ink-soft text-[14.5px] flex gap-2.5 items-start leading-relaxed"
                       >
-                        <span className="text-blue-400 mt-1">✓</span>
+                        <span className="text-accent mt-1 shrink-0">·</span>
                         <span>{f}</span>
                       </li>
                     ))}
@@ -80,20 +79,20 @@ export default function ProjectModal({ project, onClose }) {
               )}
             </div>
 
-            <div className="bg-white/[0.02] rounded-xl p-6 border border-white/[0.08] space-y-5 h-fit">
-              <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400">
+            <div className="bg-muted rounded-lg p-5 border border-border space-y-5 h-fit">
+              <h5 className="font-mono text-[12.5px] text-ink-soft">
                 Architecture
               </h5>
               {Object.entries(project.architecture).map(([k, v]) => (
                 <div key={k}>
-                  <span className="text-xs text-slate-500 font-semibold block mb-1">
+                  <span className="text-[11.5px] text-ink-soft block mb-1">
                     {k}
                   </span>
-                  <p className="text-sm font-medium text-white">{v}</p>
+                  <p className="text-[13.5px] text-ink leading-relaxed">{v}</p>
                 </div>
               ))}
-              <div className="pt-6 border-t border-white/10 space-y-2">
-                <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">
+              <div className="pt-5 border-t border-border space-y-2.5">
+                <h5 className="font-mono text-[12.5px] text-ink-soft mb-2">
                   Code
                 </h5>
                 {project.gitFrontend && (
@@ -101,9 +100,9 @@ export default function ProjectModal({ project, onClose }) {
                     href={project.gitFrontend}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-slate-300 hover:text-blue-400 transition-colors"
+                    className="flex items-center gap-2 text-[13.5px] text-ink-soft hover:text-accent transition-colors"
                   >
-                    <Icon name="code" className="!text-base" /> Frontend Repo
+                    <Icon name="github" size={14} /> Frontend repo
                   </a>
                 )}
                 {project.gitBackend && (
@@ -111,9 +110,9 @@ export default function ProjectModal({ project, onClose }) {
                     href={project.gitBackend}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-slate-300 hover:text-blue-400 transition-colors"
+                    className="flex items-center gap-2 text-[13.5px] text-ink-soft hover:text-accent transition-colors"
                   >
-                    <Icon name="storage" className="!text-base" /> Backend Repo
+                    <Icon name="github" size={14} /> Backend repo
                   </a>
                 )}
               </div>
@@ -122,23 +121,20 @@ export default function ProjectModal({ project, onClose }) {
 
           {project.gallery?.length > 0 && (
             <div>
-              <h5 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6">
-                Interface Gallery
+              <h5 className="font-mono text-[12.5px] text-ink-soft mb-5">
+                Interface gallery
               </h5>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {project.gallery.map((img, i) => (
-                  <div
-                    key={i}
-                    className="bg-black/30 border border-white/10 rounded-xl p-2 space-y-2"
-                  >
-                    <div className="rounded-lg overflow-hidden">
+                  <div key={i} className="space-y-2">
+                    <div className="rounded-lg overflow-hidden border border-border">
                       <img
                         src={img.src}
                         alt={img.caption}
-                        className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300"
+                        className="w-full h-auto object-cover"
                       />
                     </div>
-                    <p className="text-xs text-center text-slate-500 font-medium px-2 pb-1">
+                    <p className="text-[12.5px] text-ink-soft px-1">
                       {img.caption}
                     </p>
                   </div>
