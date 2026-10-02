@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SOCIAL_LINKS } from "../data";
+import { SOCIAL_LINKS, PROFILE } from "../data";
 
 export function Footer() {
   return (
@@ -10,7 +10,7 @@ export function Footer() {
             Jecinta Wangui
           </div>
           <p className="text-ink-soft text-[13.5px] mt-1">
-            Software Developer, Nairobi, Kenya
+            Software Developer, {PROFILE.location}
           </p>
         </div>
         <div className="flex gap-10">

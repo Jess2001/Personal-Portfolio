@@ -16,8 +16,8 @@ export const SOCIAL_LINKS = {
 
 export const METRICS = [
   {
-    value: "2+ Years",
-    label: "Building production software for healthcare platforms.",
+    value: "3+ Years",
+    label: "Building production software across healthcare and fintech.",
     icon: "work",
   },
   {
@@ -61,17 +61,18 @@ export const IMPACT_METRICS = [
 export const PROFILE = {
   name: "Jecinta Wangui",
   shortName: "Jess",
-  role: "Full Stack Software Developer[Front-end Focused]",
+  role: "Full Stack Developer",
   //currentCompany: "Izola Life",
   location: "Nairobi, Kenya",
+  phone: "0111 969 356",
   timezone: "GMT+3 (EAT)",
-  yearsExperience: "2+",
+  yearsExperience: "3+",
   availability: "Open to new opportunities",
 };
 
 export const ABOUT = {
   intro:
-    "I enjoy building software from interface to API. Whether I'm improving an Angular dashboard or designing a backend service with Spring Boot or Django, I focus on creating applications that are intuitive for users, maintainable for teams, and reliable in production.",
+    "I enjoy building software from interface to API. Over about three years across internships and full-time work, I've shipped Angular and TypeScript interfaces and Django REST APIs on production multi-tenant healthcare and SACCO banking platforms, designed relational schemas in PostgreSQL with transactions and concurrency-safe workflows, and leaned on pytest, GitHub Actions and Sentry to keep what I ship reliable once it's live.",
   points: [
     {
       icon: "hub",
@@ -90,8 +91,8 @@ export const ABOUT = {
     },
     {
       icon: "trending_up",
-      title: "Continuous growth",
-      body: "I'm constantly improving my backend engineering skills, deepening my understanding of distributed systems, Spring Boot and software architecture through deliberate practice.",
+      title: "Tested and debuggable",
+      body: "I write pytest/pytest-django suites and wire them into GitHub Actions CI, and lean on Sentry and structured logs to track production issues to their actual root cause rather than the symptom.",
     },
   ],
 };
@@ -281,71 +282,100 @@ export const TESTIMONIALS = [
 ];
  */
 export const SKILLS = {
+  Languages: {
+    tags: ["Python", "JavaScript", "TypeScript", "SQL"],
+  },
   Frontend: {
-    icon: "terminal",
-    color: "violet",
-    tags: ["Angular v17+", "React", "TypeScript"],
+    tags: [
+      "Angular",
+      "React",
+      "RxJS",
+      "Angular Material",
+      "Chart.js",
+      "Tailwind CSS",
+      "REST API integration",
+    ],
   },
   Backend: {
-    icon: "dns",
-    color: "purple",
-    tags: ["Django", "Flask", "Spring Boot"],
+    tags: [
+      "Django",
+      "Django REST Framework",
+      "Spring Boot",
+      "JWT & RBAC",
+      "Service-layer architecture",
+      "Swagger / OpenAPI",
+    ],
   },
-  "Design / UI": {
-    icon: "palette",
-    color: "pink",
-    tags: ["Tailwind CSS", "Material UI", "Responsive Design", "Figma"],
+  Databases: {
+    tags: [
+      "PostgreSQL",
+      "MongoDB",
+      "MongoEngine",
+      "Schema design & indexing",
+      "Query optimisation",
+    ],
   },
-  "Infra & Tools": {
-    icon: "construction",
-    color: "indigo",
-    tags: ["Git", "Docker", "Github Actions", "Sentry", "PostgreSQL"],
+  "Testing & Quality": {
+    tags: [
+      "pytest",
+      "pytest-django",
+      "Postman",
+      "GitHub Actions CI",
+      "Concurrency & regression testing",
+    ],
+  },
+  "Engineering & Tools": {
+    tags: ["Git", "Docker", "Linux", "Sentry", "Amazon S3", "System design"],
   },
 };
 
 export const EXPERIENCE = [
   {
     id: "izola",
-    role: "Software Engineer",
-    stack: "React · Angular ·  Django",
+    role: "Software Developer — Frontend & Full-Stack",
+    stack: "Angular · Django REST · RxJS · MongoDB",
     company: "Izola Life",
     location: "Kiambu, Kenya · Remote",
-    period: "July 2024 – September 2026 ",
+    period: "June 2024 – September 2026",
     color: "violet",
     bullets: [
-      "Built secure multi-tenant Django REST APIs with JWT authentication and role-based access control.",
-      "Built responsive, data-heavy administrative dashboards in Angular for healthcare operations and reporting.",
-      "Integrated M-Pesa STK push and Stripe for client session payments and invoicing capabilities.",
-      "Managed full-stack deliverables independently within a 100% remote team using async workflows and rigorous Git code reviews.",
+      "Built the Angular admin dashboard for appointments, therapists and organisations — Chart.js and Angular Material on RxJS-driven async data flows — and the Django REST backend behind each feature.",
+      "Built reporting dashboards with multi-attribute filtering (year, revenue stream, subscription type, payment status), backed by DRF and MongoDB aggregation APIs.",
+      "Built a bulk user-onboarding feature (CSV/Excel via Papa Parse) with per-row validation on both UI and API, a downloadable template and invalid-rows file, and admin-only permissions on both layers.",
+      "Implemented RBAC and tenant isolation across organisation, therapist and patient data in Django REST + MongoDB/MongoEngine APIs, validating authorisation and isolation edge cases.",
+      "Structured the Angular app with lazy-loaded feature modules, role/org route guards, a Firebase-token auth interceptor, and shareReplay caching with TTL invalidation.",
+      "Traced inconsistent paid-appointment and revenue figures to two features reading different date fields, corrected the calculation, and regression-tested across payment methods and month boundaries.",
+      "Fixed a bulk-invoicing defect where actions only covered the visible table page: the backend now counts all unpaid, attended appointments and generates invoices from the full list, not just what was on screen.",
+      "Built an audit-logging system and optimised activity-log APIs with pagination, selective field loading and caching — eliminating N+1 query patterns and contributing to roughly 30% lower query latency overall.",
+      "Documented REST APIs with Swagger/OpenAPI, reviewed teammates' changes before merge, and agreed API contracts with frontend developers and business teams across Kenya and Germany.",
     ],
   },
   {
     id: "eanem",
-    role: "Frontend Engineering Intern",
+    role: "Frontend Developer Intern",
     stack: "Angular · REST API Integration",
     company: "E and M Technology House",
     location: "Tatu City, Kenya · On-site",
-    period: "August 2023 – January 2024",
+    period: "August 2023 – March 2024",
     color: "purple",
     bullets: [
-      "Built and maintained responsive UI features in Angular for a fintech front-end application, translating design specs into polished, reusable components.",
-      "Integrated REST APIs into the Angular UI to display account and transaction data, handling loading, error, and empty states.",
-      "Worked closely with backend engineers to consume secure banking APIs, shaping requirements around real UI needs.",
-      "Practiced component-based architecture, reactive forms, and cross-browser UI testing in a fast-paced, on-site team.",
+      "Built Angular interfaces for member accounts, loan tracking, contributions and transaction management across multiple financial institutions on a multi-tenant SACCO banking platform.",
+      "Translated SACCO operating requirements from stakeholders into working Angular modules, iterating on feedback.",
+      "Integrated and tested REST APIs with Postman, validating account and transaction data and catching defects before frontend integration and release.",
+      "Collaborated with backend engineers on API contracts and defect resolution.",
     ],
   },
   {
     id: "au",
     role: "Software Developer Intern",
-    stack: "WordPress · Microsoft Dynamics 365",
+    stack: "Microsoft Dynamics 365 Business Central",
     company: "Au Innovations",
     location: "Nairobi, Kenya · On-site",
     period: "May 2022 – August 2022",
     color: "pink",
     bullets: [
-      "Developed and maintained business web properties using WordPress CMS — custom content blocks, responsive pages, and client-facing workflows.",
-      "Supported internal digital transformation initiatives using Microsoft Dynamics 365 Business Central.",
-      "Authored technical system documentation, reducing application support overhead .",
+      "Supported Dynamics 365 Business Central workflows for internal digital-transformation initiatives.",
+      "Wrote process documentation that cut support overhead by approximately 30%.",
     ],
   },
 ];
@@ -353,7 +383,7 @@ export const EXPERIENCE = [
 export const PROJECTS = [
   {
     id: "xaidi-web",
-    featured: true,
+    featured: false,
     title: "Xaidi Corporate Web Platform",
     subtitle: "Marketing Site · React + TypeScript",
     description:
@@ -432,6 +462,46 @@ export const PROJECTS = [
     },
   },
   {
+    id: "mobilend",
+    featured: true,
+    status: "In progress",
+    title: "MobiLend",
+    subtitle: "Digital Lending Platform · Django REST Framework",
+    description:
+      "A backend-only digital lending platform built around correctness under concurrency and account-integrity guarantees. Built a custom user model with JWT authentication, 6-role RBAC, OTP verification and password-reset flows. The database schema separates customer-domain data from authentication identity, with constraints protecting integrity end to end, and an atomic registration workflow that commits three related records in one transaction and rolls back on any failure.",
+    result:
+      "44 passing pytest/pytest-django tests covering authentication, authorisation across all six roles, OTP verification and rollback behaviour. Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests.",
+    tags: [
+      "Django REST Framework",
+      "PostgreSQL",
+      "pytest",
+      "Docker",
+      "JWT",
+      "RBAC",
+    ],
+    liveUrl: "",
+    gitBackend: "",
+    screenshot: "",
+    gallery: [],
+    architecture: {
+      "Custom User Model":
+        "JWT authentication via rest_framework_simplejwt, 6-role RBAC, OTP verification and password-reset flows",
+      "Schema Design":
+        "Customer-domain data separated from authentication identity, with constraints protecting data integrity; atomic 3-record registration transaction with rollback on failure",
+      "Concurrency Control":
+        "Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests",
+      "Testing & Containerisation":
+        "44 pytest/pytest-django tests; Dockerised with PostgreSQL; documented with Swagger/OpenAPI",
+    },
+    keyFeatures: [
+      "Custom user model with JWT authentication and 6-role RBAC",
+      "OTP verification and password-reset flows",
+      "Atomic registration workflow committing three related records in one transaction, with rollback on failure",
+      "Row-level locking prevents duplicate customer numbers under concurrent requests",
+      "44 pytest/pytest-django tests across authentication, authorisation, OTP and rollback behaviour",
+    ],
+  },
+  {
     id: "clinic-booking",
     featured: false,
     title: "Clinic Booking API",
@@ -439,7 +509,7 @@ export const PROJECTS = [
     description:
       "A backend-only clinic appointment scheduling API built to survive the failure mode most booking systems get wrong: two people booking the same slot at the same time. Every appointment is validated against a fixed 30-minute grid stored in timezone-safe UTC, then written inside an atomic transaction guarded by a pessimistic row lock and a composite database constraint — so the database itself refuses a double-booking, not just the application code.",
     result:
-      "17 passing tests including a ThreadPoolExecutor concurrency test that fires simultaneous booking requests at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
+      "17 passing tests including a ThreadPoolExecutor concurrency test that fires booking requests roughly 200ms apart at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
     tags: [
       "Python",
       "Django REST Framework",

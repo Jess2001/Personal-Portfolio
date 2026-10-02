@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Icon } from "./ui";
-import { SOCIAL_LINKS } from "../data";
+import { SOCIAL_LINKS, PROFILE } from "../data";
 
 const inputClass =
   "w-full bg-bg border border-border focus:border-accent outline-none rounded-lg px-4 py-2.5 text-ink text-[14.5px] placeholder:text-ink-soft transition-colors";
@@ -56,8 +56,16 @@ export default function Contact() {
             >
               <Icon name="github" size={16} /> GitHub
             </a>
+            {PROFILE.phone && (
+              <a
+                href={`tel:${PROFILE.phone.replace(/\s+/g, "")}`}
+                className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
+              >
+                <Icon name="phone" size={16} /> {PROFILE.phone}
+              </a>
+            )}
             <p className="flex items-center gap-3 text-ink-soft text-[14.5px]">
-              <Icon name="location" size={16} /> Nairobi, Kenya
+              <Icon name="location" size={16} /> {PROFILE.location}
             </p>
           </div>
         </div>
