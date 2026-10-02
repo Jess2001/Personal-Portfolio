@@ -19,7 +19,7 @@ export default function ProjectCard({ project }) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <p className="text-ink-soft text-[13px]">No screenshot available</p>
+              <p className="text-ink-soft text-[13px]">Coming soon</p>
             </div>
           )}
           {!project?.featured && (

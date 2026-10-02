@@ -491,7 +491,7 @@ export const PROJECTS = [
       "Concurrency Control":
         "Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests",
       "Testing & Containerisation":
-        "44 pytest/pytest-django tests; Dockerised with PostgreSQL; documented with Swagger/OpenAPI",
+        "unit & integration tests ; pytest/pytest-django tests; Dockerised with PostgreSQL; documented with Swagger/OpenAPI",
     },
     keyFeatures: [
       "Custom user model with JWT authentication and 6-role RBAC",
@@ -509,7 +509,7 @@ export const PROJECTS = [
     description:
       "A backend-only clinic appointment scheduling API built to survive the failure mode most booking systems get wrong: two people booking the same slot at the same time. Every appointment is validated against a fixed 30-minute grid stored in timezone-safe UTC, then written inside an atomic transaction guarded by a pessimistic row lock and a composite database constraint — so the database itself refuses a double-booking, not just the application code.",
     result:
-      "17 passing tests including a ThreadPoolExecutor concurrency test that fires booking requests roughly 200ms apart at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
+      "80% test coverage including a ThreadPoolExecutor concurrency test that fires booking requests roughly 200ms apart at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
     tags: [
       "Python",
       "Django REST Framework",
@@ -550,7 +550,7 @@ export const PROJECTS = [
     title: "Xaidi App — React Native to React Migration",
     subtitle: "Platform Migration · React JS + Material UI",
     description:
-      "Led the migration of core user-facing screens in the Xaidi platform from React Native to React JS web components, preserving full feature parity and interaction patterns while adapting mobile-first layouts for the browser. Profile and Settings were the two highest-traffic screens in the migration — covering account management, subscription/session data, availability scheduling, theming (light/dark), language preferences, and support channels.",
+      "Contributed to the migration of core user-facing screens in the Xaidi platform from React Native to React JS web components, preserving full feature parity and interaction patterns while adapting mobile-first layouts for the browser. Profile and Settings were the two highest-traffic screens in the migration — covering account management, subscription/session data, availability scheduling, theming (light/dark), language preferences, and support channels.",
     result:
       "Shipped production-ready web equivalents of two of the app's most-used screens with zero feature regressions, giving the team a reusable pattern for migrating the remaining React Native screens.",
     tags: ["React", "Material UI", "React Native", "Responsive Design"],
@@ -594,6 +594,7 @@ export const PROJECTS = [
     id: "edupulse",
     featured: false,
     title: "EduPulse Results",
+    status: "On hold",
     subtitle: "Education Analytics · Angular 20 + Spring Boot",
     description:
       "Full-stack academic performance analytics platform enabling educators and administrators to track student progress in real-time. Built a scalable multi-role dashboard system (Admin, Teacher, Student) with shared components, reusable data tables, and interactive visualizations. Implemented lazy-loaded nested routes, environment-based API configuration, and role-based access control.",
