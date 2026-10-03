@@ -41,7 +41,7 @@ export default function Navbar() {
             aria-label={
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
-            className="w-9 h-9 flex items-center justify-center rounded-md border border-border-accent text-ink-soft hover:text-ink hover:border-accent transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-md border border-border text-ink-soft hover:text-ink hover:border-accent transition-colors"
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} size={16} />
           </button>
@@ -49,7 +49,7 @@ export default function Navbar() {
             href={SOCIAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ink-soft hover:text-ink transition-colors text-[14.5px] rounded-md border border-border-accent px-3 py-2 hover:border-accent"
+            className="text-ink-soft hover:text-ink transition-colors text-[14.5px] rounded-md border border-border px-3 py-2 hover:border-accent"
           >
             GitHub
           </a>

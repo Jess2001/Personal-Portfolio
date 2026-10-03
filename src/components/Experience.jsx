@@ -54,8 +54,7 @@ export default function Experience() {
         Experience
       </h2>
       <p className="text-ink-soft text-[15px] mb-14 max-w-lg">
-        2+ years building production systems across healthcare, fintech, and
-        education.
+        3+ years building production systems across healthcare and fintech.
       </p>
       <div>
         {EXPERIENCE.map((job, i) => (

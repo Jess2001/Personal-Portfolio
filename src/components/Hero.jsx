@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { Icon } from "./ui";
-import { SOCIAL_LINKS } from "../data";
+import { SOCIAL_LINKS, PROFILE } from "../data";
 
 const STACK = [
+  "Python",
+  "JavaScript",
   "Angular",
   "React",
   "TypeScript",
   "Django REST",
-  "Spring Boot",
-  "PostgreSQL",
+  //"Spring Boot",
+  "SQL",
   "MongoDB",
 ];
 
@@ -30,10 +32,9 @@ export default function Hero() {
 
           <p className="mt-9 text-[17px] md:text-[18px] text-ink-soft leading-8 max-w-xl">
             I build full-stack web applications , Angular and React on the
-            frontend, Python,(Django) and Java on the backend,
-            with PostgreSQL and MongoDB for data. Most of my production work
-            so far has been in healthcare and fintech, based in Nairobi,
-            Kenya.
+            frontend, Python and Django REST Framework on the backend, with
+            PostgreSQL and MongoDB for data. Most of my production work so
+            far has been in healthcare and fintech, based in {PROFILE.location}.
           </p>
 
           <p className="mt-6 font-mono text-[13.5px] text-ink-soft">
@@ -65,7 +66,7 @@ export default function Hero() {
               href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink-soft  hover:text-ink text-[14.5px] transition-colors"
+              className="text-ink-soft hover:text-ink text-[14.5px] transition-colors"
             >
               GitHub
             </a>
@@ -80,7 +81,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="w-full max-w-[140px] lg:max-w-none lg:justify-self-end">
+        <div className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] lg:justify-self-end">
           <div className="aspect-[4/5] w-full rounded-xl overflow-hidden border border-border bg-muted">
             <img
               src="/assets/Jess.jpeg"
