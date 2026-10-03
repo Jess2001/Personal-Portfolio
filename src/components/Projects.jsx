@@ -22,7 +22,7 @@ export default function ProjectCard({ project }) {
               <p className="text-ink-soft text-[13px]">Coming soon</p>
             </div>
           )}
-          {!project?.featured && (
+          {project?.sideProject && (
             <div className="absolute top-3 right-3 px-2.5 py-1 bg-bg/90 border border-border rounded-md text-[11.5px] font-mono text-ink-soft">
               Side project
             </div>

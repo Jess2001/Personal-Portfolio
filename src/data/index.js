@@ -12,6 +12,11 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/jecintawangui/",
   email: "jecintawangui2001@gmail.com",
   resume: "/assets/Jecinta-Wangui-CV.pdf",
+  whatsapp:
+    "https://wa.me/254727549959?text=" +
+    encodeURIComponent(
+      "Hi Jecinta, I saw your portfolio and wanted to reach out.",
+    ),
 };
 
 export const METRICS = [
@@ -35,7 +40,7 @@ export const METRICS = [
   {
     value: "Backend",
     label:
-      "Spring Boot and Django REST APIs following clean architecture principles.",
+      "Python Django REST APIs following clean architecture principles.",
     icon: "dns",
   },
 ];
@@ -63,7 +68,7 @@ export const PROFILE = {
   shortName: "Jess",
   role: "Full Stack Developer",
   //currentCompany: "Izola Life",
-  location: "Nairobi, Kenya",
+  location: "Nyeri, Kenya",
   phone: "0111 969 356",
   timezone: "GMT+3 (EAT)",
   yearsExperience: "3+",
@@ -97,38 +102,46 @@ export const ABOUT = {
   ],
 };
 
+
 export const PHILOSOPHY = [
   {
     icon: "code",
-    title: "Clean code, read twice as often as written",
-    body: "Naming, structure, and small functions aren't style preferences — they're what makes a codebase safe to change six months later.",
+    title: "Keep code easy to work with",
+    body: "I try to keep code clear, consistent, and easy for another developer to pick up. Good naming, sensible structure, and small focused functions go a long way.",
   },
+
   {
-    icon: "trending_up",
-    title: "Design for scale, ship for now",
-    body: "I plan the schema and the API contract for growth, but I don't gold-plate a feature nobody has asked to scale yet.",
+    icon: "account_tree",
+    title: "Think about the whole system",
+    body: "I like understanding how the frontend, API, database, and the people using them fit together before changing one piece.",
   },
+
   {
-    icon: "bolt",
-    title: "Performance is a feature",
-    body: "Query indexing, caching, and lazy loading aren't optional polish — a slow dashboard is a broken dashboard to the person using it.",
+    icon: "bug_report",
+    title: "Debug the problem, not the symptom",
+    body: "When something breaks, I trace it through the application, logs, requests, and database rather than patching the first thing that looks wrong.",
   },
+
   {
-    icon: "accessibility_new",
-    title: "Accessible by default",
-    body: "Semantic markup, keyboard navigation, and color contrast get checked before a feature is called done, not bolted on after a complaint.",
+    icon: "database",
+    title: "Make the database work for the application",
+    body: "I pay attention to how data is modelled, how queries are written, and where unnecessary database work can slow an application down.",
   },
+
   {
     icon: "verified",
-    title: "Tests earn trust",
-    body: "I write tests so I can change code with confidence, not to hit a coverage number — the concurrency tests I write are the ones that catch real bugs.",
+    title: "Test what can break",
+    body: "I use tests to catch regressions and give me confidence when changing existing code, especially around permissions, business rules, and important backend flows.",
   },
+
   {
-    icon: "favorite",
-    title: "Build for the human on the other end",
-    body: "Every architecture decision eventually shows up as a loading spinner, an error message, or a delightfully fast page. I try to remember that at every layer.",
+    icon: "groups",
+    title: "Build with the team",
+    body: "I value code reviews, clear communication, and being able to explain why I made a technical decision. The goal is to solve the problem, not just write the code.",
   },
 ];
+
+
 
 /* export const PROCESS_STEPS = [
   {
@@ -207,27 +220,30 @@ export const ARCHITECTURE_LAYERS = [
 
 export const GITHUB = {
   username: "Jess2001",
+
   pinnedRepos: [
     {
-      name: "edu-pulse-frontend",
+      name: "furniture-store",
       description:
-        "Angular 20 frontend for a multi-role academic analytics platform.",
-      url: "https://github.com/Jess2001/edu-pulse-frontend",
-      tags: ["Angular", "TypeScript"],
+        "Full-stack furniture ecommerce platform with a Django REST API and React frontend.",
+      url: "https://github.com/Jess2001/furniture-store",
+      tags: ["React", "TypeScript", "Django", "PostgreSQL", "Docker", "JWT auth", "RBAC", "pytest",],
     },
+
     {
-      name: "edu_pulse",
+      name: "MobiLendPlatform",
       description:
-        "Spring Boot REST API powering the EduPulse analytics platform.",
-      url: "https://github.com/Jess2001/edu_pulse",
-      tags: ["Java", "Spring Boot"],
+        "Backend-focused digital lending platform built around authentication, authorization, data integrity, and reliable API design.",
+      url: "https://github.com/Jess2001/MobiLendPlatform",
+      tags: ["Python", "Django REST", "React", "Typescript", "PostgreSQL", "pytest", "Docker"],
     },
+
     {
-      name: "portfolio",
+      name: "clinic-booking-api",
       description:
-        "This site — React + Tailwind, built and iterated component by component.",
-      url: "https://github.com/Jess2001/jess2001.github.io",
-      tags: ["React", "Tailwind"],
+        "REST API for clinic appointment booking with authentication, booking rules, and transaction-safe scheduling.",
+      url: "https://github.com/Jess2001/clinic-booking-api",
+      tags: ["Python", "Django REST", "PostgreSQL", "pytest",' GitHub Actions', "RBAC", "JWT auth"],
     },
   ],
 };
@@ -339,14 +355,14 @@ export const EXPERIENCE = [
     period: "June 2024 – September 2026",
     color: "violet",
     bullets: [
-      "Built the Angular admin dashboard for appointments, therapists and organisations — Chart.js and Angular Material on RxJS-driven async data flows — and the Django REST backend behind each feature.",
+      "Built the Angular admin dashboard for appointments, therapists and organisations , Chart.js and Angular Material on RxJS-driven async data flows — and the Django REST backend behind each feature.",
       "Built reporting dashboards with multi-attribute filtering (year, revenue stream, subscription type, payment status), backed by DRF and MongoDB aggregation APIs.",
       "Built a bulk user-onboarding feature (CSV/Excel via Papa Parse) with per-row validation on both UI and API, a downloadable template and invalid-rows file, and admin-only permissions on both layers.",
       "Implemented RBAC and tenant isolation across organisation, therapist and patient data in Django REST + MongoDB/MongoEngine APIs, validating authorisation and isolation edge cases.",
       "Structured the Angular app with lazy-loaded feature modules, role/org route guards, a Firebase-token auth interceptor, and shareReplay caching with TTL invalidation.",
       "Traced inconsistent paid-appointment and revenue figures to two features reading different date fields, corrected the calculation, and regression-tested across payment methods and month boundaries.",
       "Fixed a bulk-invoicing defect where actions only covered the visible table page: the backend now counts all unpaid, attended appointments and generates invoices from the full list, not just what was on screen.",
-      "Built an audit-logging system and optimised activity-log APIs with pagination, selective field loading and caching — eliminating N+1 query patterns and contributing to roughly 30% lower query latency overall.",
+      "Built an audit-logging system and optimised activity-log APIs with pagination, selective field loading and caching , eliminating N+1 query patterns and contributing to roughly 30% lower query latency overall.",
       "Documented REST APIs with Swagger/OpenAPI, reviewed teammates' changes before merge, and agreed API contracts with frontend developers and business teams across Kenya and Germany.",
     ],
   },
@@ -464,13 +480,14 @@ export const PROJECTS = [
   {
     id: "mobilend",
     featured: true,
+    sideProject: true,
     status: "In progress",
     title: "MobiLend",
     subtitle: "Digital Lending Platform · Django REST Framework",
     description:
       "A backend-only digital lending platform built around correctness under concurrency and account-integrity guarantees. Built a custom user model with JWT authentication, 6-role RBAC, OTP verification and password-reset flows. The database schema separates customer-domain data from authentication identity, with constraints protecting integrity end to end, and an atomic registration workflow that commits three related records in one transaction and rolls back on any failure.",
     result:
-      "44 passing pytest/pytest-django tests covering authentication, authorisation across all six roles, OTP verification and rollback behaviour. Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests.",
+      "Unit and integrations pytest/pytest-django tests covering authentication, authorisation across all six roles, OTP verification and rollback behaviour. Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests.",
     tags: [
       "Django REST Framework",
       "PostgreSQL",
@@ -480,7 +497,7 @@ export const PROJECTS = [
       "RBAC",
     ],
     liveUrl: "",
-    gitBackend: "",
+    gitBackend: "https://github.com/Jess2001/MobiLendPlatform",
     screenshot: "",
     gallery: [],
     architecture: {
@@ -491,7 +508,7 @@ export const PROJECTS = [
       "Concurrency Control":
         "Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests",
       "Testing & Containerisation":
-        "unit & integration tests ; pytest/pytest-django tests; Dockerised with PostgreSQL; documented with Swagger/OpenAPI",
+        "44 pytest/pytest-django tests; Dockerised with PostgreSQL; documented with Swagger/OpenAPI",
     },
     keyFeatures: [
       "Custom user model with JWT authentication and 6-role RBAC",
@@ -504,12 +521,13 @@ export const PROJECTS = [
   {
     id: "clinic-booking",
     featured: false,
+    sideProject: true,
     title: "Clinic Booking API",
     subtitle: "Concurrency-Safe Scheduling Engine · Django REST Framework",
     description:
       "A backend-only clinic appointment scheduling API built to survive the failure mode most booking systems get wrong: two people booking the same slot at the same time. Every appointment is validated against a fixed 30-minute grid stored in timezone-safe UTC, then written inside an atomic transaction guarded by a pessimistic row lock and a composite database constraint — so the database itself refuses a double-booking, not just the application code.",
     result:
-      "80% test coverage including a ThreadPoolExecutor concurrency test that fires booking requests roughly 200ms apart at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
+      "17 passing tests including a ThreadPoolExecutor concurrency test that fires booking requests roughly 200ms apart at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
     tags: [
       "Python",
       "Django REST Framework",
@@ -550,7 +568,7 @@ export const PROJECTS = [
     title: "Xaidi App — React Native to React Migration",
     subtitle: "Platform Migration · React JS + Material UI",
     description:
-      "Contributed to the migration of core user-facing screens in the Xaidi platform from React Native to React JS web components, preserving full feature parity and interaction patterns while adapting mobile-first layouts for the browser. Profile and Settings were the two highest-traffic screens in the migration — covering account management, subscription/session data, availability scheduling, theming (light/dark), language preferences, and support channels.",
+      "Led the migration of core user-facing screens in the Xaidi platform from React Native to React JS web components, preserving full feature parity and interaction patterns while adapting mobile-first layouts for the browser. Profile and Settings were the two highest-traffic screens in the migration — covering account management, subscription/session data, availability scheduling, theming (light/dark), language preferences, and support channels.",
     result:
       "Shipped production-ready web equivalents of two of the app's most-used screens with zero feature regressions, giving the team a reusable pattern for migrating the remaining React Native screens.",
     tags: ["React", "Material UI", "React Native", "Responsive Design"],
@@ -593,16 +611,16 @@ export const PROJECTS = [
   {
     id: "edupulse",
     featured: false,
+    sideProject: true,
     title: "EduPulse Results",
-    status: "On hold",
-    subtitle: "Education Analytics · Angular 20 + Spring Boot",
+    subtitle: "Education Analytics · Angular 20 ",
     description:
       "Full-stack academic performance analytics platform enabling educators and administrators to track student progress in real-time. Built a scalable multi-role dashboard system (Admin, Teacher, Student) with shared components, reusable data tables, and interactive visualizations. Implemented lazy-loaded nested routes, environment-based API configuration, and role-based access control.",
     result:
       "Architected scalable codebase supporting  students across multiple forms with feature-based folder structure and  code reusability through component composition.",
     tags: [
       "Angular 20",
-      "Spring Boot",
+      //"Spring Boot",
       "TypeScript",
       "Chart.js",
       "REST APIs",
@@ -638,7 +656,7 @@ export const PROJECTS = [
     architecture: {
       "Frontend Stack":
         "Angular 20 (standalone components), RxJS Observables, Chart.js visualizations",
-      "Backend Stack": "Spring Boot 3.x, Java 21, REST controllers with CORS",
+     // "Backend Stack": "Spring Boot 3.x, Java 21, REST controllers with CORS",
       "Architecture Pattern":
         "Feature-based modules, lazy loading, shared sidebar with role-based nav, reusable component system",
     },

@@ -10,7 +10,7 @@ import Projects from "../components/FeaturedProjects";
 import Philosophy from "../components/Philosophy";
 import Contact from "../components/Contact";
 import { Footer } from "../components/CtaFooter";
-
+import GithubActivity from "../components/GithubActivity";
 export default function Home() {
   const { hash } = useLocation();
 
@@ -32,10 +32,11 @@ export default function Home() {
         <Hero />
         <Metrics />
         <About />
+        <Philosophy />
         <Experience />
         <Skills />
         <Projects />
-        <Philosophy />
+        <GithubActivity />
         <Contact />
       </main>
       <Footer />

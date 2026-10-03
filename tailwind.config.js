@@ -14,24 +14,15 @@ export default {
         "accent-hover": "var(--accent-hover)",
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "-apple-system",
-          "Segoe UI",
-          "Helvetica Neue",
-          "Arial",
-          "sans-serif",
-        ],
-        mono: [
-          "IBM Plex Mono",
-          "ui-monospace",
-          "SFMono-Regular",
-          "Menlo",
-          "monospace",
-        ],
+        sans: ["Inter", "-apple-system", "sans-serif"],
+        mono: ["IBM Plex Mono", "monospace"],
       },
+      // Shifting from ultra-wide 1800px down to an tight layout framework
       maxWidth: {
-        content: "1800px",
+        portfolio: "1024px" /* Tight desktop layout bounds */,
+        projectSection:
+          "900px" /* Narrows the work viewport down for easy viewing */,
+        reading: "60ch" /* High-density reading safety limit */,
       },
     },
   },

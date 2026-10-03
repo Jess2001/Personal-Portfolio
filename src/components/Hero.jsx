@@ -3,12 +3,14 @@ import { Icon } from "./ui";
 import { SOCIAL_LINKS, PROFILE } from "../data";
 
 const STACK = [
+  "Python",
+  "JavaScript",
   "Angular",
   "React",
   "TypeScript",
   "Django REST",
-  "Spring Boot",
-  "PostgreSQL",
+  //"Spring Boot",
+  "SQL",
   "MongoDB",
 ];
 
@@ -29,7 +31,7 @@ export default function Hero() {
           </p>
 
           <p className="mt-9 text-[17px] md:text-[18px] text-ink-soft leading-8 max-w-xl">
-            I build full-stack web applications — Angular and React on the
+            I build full-stack web applications , Angular and React on the
             frontend, Python and Django REST Framework on the backend, with
             PostgreSQL and MongoDB for data. Most of my production work so
             far has been in healthcare and fintech, based in {PROFILE.location}.
