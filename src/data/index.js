@@ -398,6 +398,41 @@ export const EXPERIENCE = [
 
 export const PROJECTS = [
   {
+    id: "furniture-store",
+    featured: true,
+    sideProject: true,
+    status: "In progress",
+    title: "Furniture Store",
+    subtitle: "Ecommerce Platform (backend) · Django REST Framework",
+    description:
+      "A furniture ecommerce backend built as a modular Django REST monolith — separate apps for accounts, catalog, inventory, cart, orders, payments and customers, each owning its own models and business logic. Products and variants are modelled separately (a product like a dining table has variants for finish and seat count), with inventory tracked at the variant level. Checkout uses select_for_update() inside atomic transactions so concurrent requests can't oversell the same stock, and orders store historical snapshots of product name, SKU and price so past orders stay accurate even after a product changes. Business workflows live in a service layer, kept out of models and views. A React + TypeScript frontend is planned but not yet started.",
+    result:
+      "Foundation, authentication (JWT, roles, permissions), catalog, inventory & cart, and the full order/checkout workflow are complete and tested with pytest. Currently building the payments phase — M-Pesa and Stripe integration, with provider webhooks (not frontend responses) treated as the source of truth for payment completion.",
+    tags: ["Django REST Framework", "PostgreSQL", "JWT", "pytest", "Docker"],
+    liveUrl: "https://luxury-living-nairobi.netlify.app",
+    gitHub: "https://github.com/Jess2001/furniture-store",
+    screenshot: "",
+    gallery: [],
+    architecture: {
+      "Domain Modelling":
+        "Product/ProductVariant split — inventory and SKUs live on the variant, not the product, since that's what's actually sellable",
+      Concurrency:
+        "Checkout wrapped in transaction.atomic() with select_for_update() row locking to prevent overselling under concurrent requests",
+      "Order Integrity":
+        "OrderItem stores historical snapshots (product name, variant, SKU, unit price) so past orders stay accurate after catalog changes",
+      "Service Layer":
+        "Business workflows (checkout, payments, refunds) separated from models/serializers/views into a dedicated service layer",
+    },
+    keyFeatures: [
+      "Modular Django REST monolith: accounts, catalog, inventory, cart, orders, payments and customers as separate apps",
+      "Variant-level inventory with concurrency-safe checkout (select_for_update, atomic transactions)",
+      "Historical order snapshots — past orders remain accurate even if product details change later",
+      "JWT authentication with role-based, server-side authorization",
+      "Payment attempts tracked independently from orders, so a failed payment allows retry without corrupting order state",
+      "Currently building: M-Pesa and Stripe integration, with provider webhooks as the source of truth for payment completion",
+    ],
+  },
+  {
     id: "xaidi-web",
     featured: false,
     title: "Xaidi Corporate Web Platform",
@@ -479,7 +514,7 @@ export const PROJECTS = [
   },
   {
     id: "mobilend",
-    featured: true,
+    featured: false,
     sideProject: true,
     status: "In progress",
     title: "MobiLend",
@@ -518,6 +553,7 @@ export const PROJECTS = [
       "44 pytest/pytest-django tests across authentication, authorisation, OTP and rollback behaviour",
     ],
   },
+
   {
     id: "clinic-booking",
     featured: false,
@@ -656,7 +692,7 @@ export const PROJECTS = [
     architecture: {
       "Frontend Stack":
         "Angular 20 (standalone components), RxJS Observables, Chart.js visualizations",
-     // "Backend Stack": "Spring Boot 3.x, Java 21, REST controllers with CORS",
+      // "Backend Stack": "Spring Boot 3.x, Java 21, REST controllers with CORS",
       "Architecture Pattern":
         "Feature-based modules, lazy loading, shared sidebar with role-based nav, reusable component system",
     },
