@@ -2,13 +2,16 @@ import { ABOUT, PROFILE } from "../data";
 
 const NOW = [
   { label: "Role", value: "Software Developer" },
-  { label: "Stack", value: "Angular · React · Django · Spring Boot" },
+  {
+    label: "Stack",
+    value: "Angular · React · Django ·Python ·Javascript ·Python · Typescript · SQL",
+  },
   { label: "Focus", value: "Healthcare and fintech platforms" },
   { label: "Based in", value: PROFILE.location },
   { label: "Status", value: PROFILE.availability },
 ];
 
-function Point({ point }) {
+/* function Point({ point }) {
   return (
     <div className="border-t border-border pt-5">
       <h3 className="text-[16px] font-semibold text-ink mb-2">
@@ -18,7 +21,7 @@ function Point({ point }) {
     </div>
   );
 }
-
+ */
 export default function About() {
   return (
     <section
@@ -36,11 +39,11 @@ export default function About() {
             {ABOUT.intro}
           </p>
 
-          <div className="mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-6">
+          {/* <div className="mt-10 grid sm:grid-cols-2 gap-x-8 gap-y-6">
             {ABOUT.points.map((point) => (
               <Point key={point.title} point={point} />
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="lg:sticky lg:top-28 h-fit">

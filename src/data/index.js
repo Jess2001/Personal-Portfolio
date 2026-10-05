@@ -12,12 +12,17 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/jecintawangui/",
   email: "jecintawangui2001@gmail.com",
   resume: "/assets/Jecinta-Wangui-CV.pdf",
+  whatsapp:
+    "https://wa.me/254727549959?text=" +
+    encodeURIComponent(
+      "Hi Jecinta, I saw your portfolio and wanted to reach out.",
+    ),
 };
 
 export const METRICS = [
   {
-    value: "2+ Years",
-    label: "Building production software for healthcare platforms.",
+    value: "3+ Years",
+    label: "Building production software across healthcare and fintech.",
     icon: "work",
   },
   {
@@ -35,7 +40,7 @@ export const METRICS = [
   {
     value: "Backend",
     label:
-      "Spring Boot and Django REST APIs following clean architecture principles.",
+      "Python Django REST APIs following clean architecture principles.",
     icon: "dns",
   },
 ];
@@ -61,17 +66,18 @@ export const IMPACT_METRICS = [
 export const PROFILE = {
   name: "Jecinta Wangui",
   shortName: "Jess",
-  role: "Full Stack Software Developer[Front-end Focused]",
+  role: "Full Stack Developer",
   //currentCompany: "Izola Life",
-  location: "Nairobi, Kenya",
+  location: "Nyeri, Kenya",
+  phone: "0111 969 356",
   timezone: "GMT+3 (EAT)",
-  yearsExperience: "2+",
+  yearsExperience: "3+",
   availability: "Open to new opportunities",
 };
 
 export const ABOUT = {
   intro:
-    "I enjoy building software from interface to API. Whether I'm improving an Angular dashboard or designing a backend service with Spring Boot or Django, I focus on creating applications that are intuitive for users, maintainable for teams, and reliable in production.",
+    "I enjoy building software from interface to API. Over about three years across internships and full-time work, I've shipped Angular and TypeScript interfaces and Django REST APIs on production multi-tenant healthcare and SACCO banking platforms, designed relational schemas in PostgreSQL with transactions and concurrency-safe workflows, and leaned on pytest, GitHub Actions and Sentry to keep what I ship reliable once it's live.",
   points: [
     {
       icon: "hub",
@@ -90,44 +96,52 @@ export const ABOUT = {
     },
     {
       icon: "trending_up",
-      title: "Continuous growth",
-      body: "I'm constantly improving my backend engineering skills, deepening my understanding of distributed systems, Spring Boot and software architecture through deliberate practice.",
+      title: "Tested and debuggable",
+      body: "I write pytest/pytest-django suites and wire them into GitHub Actions CI, and lean on Sentry and structured logs to track production issues to their actual root cause rather than the symptom.",
     },
   ],
 };
 
+
 export const PHILOSOPHY = [
   {
     icon: "code",
-    title: "Clean code, read twice as often as written",
-    body: "Naming, structure, and small functions aren't style preferences — they're what makes a codebase safe to change six months later.",
+    title: "Keep code easy to work with",
+    body: "I try to keep code clear, consistent, and easy for another developer to pick up. Good naming, sensible structure, and small focused functions go a long way.",
   },
+
   {
-    icon: "trending_up",
-    title: "Design for scale, ship for now",
-    body: "I plan the schema and the API contract for growth, but I don't gold-plate a feature nobody has asked to scale yet.",
+    icon: "account_tree",
+    title: "Think about the whole system",
+    body: "I like understanding how the frontend, API, database, and the people using them fit together before changing one piece.",
   },
+
   {
-    icon: "bolt",
-    title: "Performance is a feature",
-    body: "Query indexing, caching, and lazy loading aren't optional polish — a slow dashboard is a broken dashboard to the person using it.",
+    icon: "bug_report",
+    title: "Debug the problem, not the symptom",
+    body: "When something breaks, I trace it through the application, logs, requests, and database rather than patching the first thing that looks wrong.",
   },
+
   {
-    icon: "accessibility_new",
-    title: "Accessible by default",
-    body: "Semantic markup, keyboard navigation, and color contrast get checked before a feature is called done, not bolted on after a complaint.",
+    icon: "database",
+    title: "Make the database work for the application",
+    body: "I pay attention to how data is modelled, how queries are written, and where unnecessary database work can slow an application down.",
   },
+
   {
     icon: "verified",
-    title: "Tests earn trust",
-    body: "I write tests so I can change code with confidence, not to hit a coverage number — the concurrency tests I write are the ones that catch real bugs.",
+    title: "Test what can break",
+    body: "I use tests to catch regressions and give me confidence when changing existing code, especially around permissions, business rules, and important backend flows.",
   },
+
   {
-    icon: "favorite",
-    title: "Build for the human on the other end",
-    body: "Every architecture decision eventually shows up as a loading spinner, an error message, or a delightfully fast page. I try to remember that at every layer.",
+    icon: "groups",
+    title: "Build with the team",
+    body: "I value code reviews, clear communication, and being able to explain why I made a technical decision. The goal is to solve the problem, not just write the code.",
   },
 ];
+
+
 
 /* export const PROCESS_STEPS = [
   {
@@ -206,27 +220,30 @@ export const ARCHITECTURE_LAYERS = [
 
 export const GITHUB = {
   username: "Jess2001",
+
   pinnedRepos: [
     {
-      name: "edu-pulse-frontend",
+      name: "furniture-store",
       description:
-        "Angular 20 frontend for a multi-role academic analytics platform.",
-      url: "https://github.com/Jess2001/edu-pulse-frontend",
-      tags: ["Angular", "TypeScript"],
+        "Full-stack furniture ecommerce platform with a Django REST API and React frontend.",
+      url: "https://github.com/Jess2001/furniture-store",
+      tags: ["React", "TypeScript", "Django", "PostgreSQL", "Docker", "JWT auth", "RBAC", "pytest",],
     },
+
     {
-      name: "edu_pulse",
+      name: "MobiLendPlatform",
       description:
-        "Spring Boot REST API powering the EduPulse analytics platform.",
-      url: "https://github.com/Jess2001/edu_pulse",
-      tags: ["Java", "Spring Boot"],
+        "Backend-focused digital lending platform built around authentication, authorization, data integrity, and reliable API design.",
+      url: "https://github.com/Jess2001/MobiLendPlatform",
+      tags: ["Python", "Django REST", "React", "Typescript", "PostgreSQL", "pytest", "Docker"],
     },
+
     {
-      name: "portfolio",
+      name: "clinic-booking-api",
       description:
-        "This site — React + Tailwind, built and iterated component by component.",
-      url: "https://github.com/Jess2001/jess2001.github.io",
-      tags: ["React", "Tailwind"],
+        "REST API for clinic appointment booking with authentication, booking rules, and transaction-safe scheduling.",
+      url: "https://github.com/Jess2001/clinic-booking-api",
+      tags: ["Python", "Django REST", "PostgreSQL", "pytest",' GitHub Actions', "RBAC", "JWT auth"],
     },
   ],
 };
@@ -281,79 +298,143 @@ export const TESTIMONIALS = [
 ];
  */
 export const SKILLS = {
+  Languages: {
+    tags: ["Python", "JavaScript", "TypeScript", "SQL"],
+  },
   Frontend: {
-    icon: "terminal",
-    color: "violet",
-    tags: ["Angular v17+", "React", "TypeScript"],
+    tags: [
+      "Angular",
+      "React",
+      "RxJS",
+      "Angular Material",
+      "Chart.js",
+      "Tailwind CSS",
+      "REST API integration",
+    ],
   },
   Backend: {
-    icon: "dns",
-    color: "purple",
-    tags: ["Django", "Flask", "Spring Boot"],
+    tags: [
+      "Django",
+      "Django REST Framework",
+      "Spring Boot",
+      "JWT & RBAC",
+      "Service-layer architecture",
+      "Swagger / OpenAPI",
+    ],
   },
-  "Design / UI": {
-    icon: "palette",
-    color: "pink",
-    tags: ["Tailwind CSS", "Material UI", "Responsive Design", "Figma"],
+  Databases: {
+    tags: [
+      "PostgreSQL",
+      "MongoDB",
+      "MongoEngine",
+      "Schema design & indexing",
+      "Query optimisation",
+    ],
   },
-  "Infra & Tools": {
-    icon: "construction",
-    color: "indigo",
-    tags: ["Git", "Docker", "Github Actions", "Sentry", "PostgreSQL"],
+  "Testing & Quality": {
+    tags: [
+      "pytest",
+      "pytest-django",
+      "Postman",
+      "GitHub Actions CI",
+      "Concurrency & regression testing",
+    ],
+  },
+  "Engineering & Tools": {
+    tags: ["Git", "Docker", "Linux", "Sentry", "Amazon S3", "System design"],
   },
 };
 
 export const EXPERIENCE = [
   {
     id: "izola",
-    role: "Software Engineer",
-    stack: "React · Angular ·  Django",
+    role: "Software Developer — Frontend & Full-Stack",
+    stack: "Angular · Django REST · RxJS · MongoDB",
     company: "Izola Life",
     location: "Kiambu, Kenya · Remote",
-    period: "July 2024 – September 2026 ",
+    period: "June 2024 – September 2026",
     color: "violet",
     bullets: [
-      "Built secure multi-tenant Django REST APIs with JWT authentication and role-based access control.",
-      "Built responsive, data-heavy administrative dashboards in Angular for healthcare operations and reporting.",
-      "Integrated M-Pesa STK push and Stripe for client session payments and invoicing capabilities.",
-      "Managed full-stack deliverables independently within a 100% remote team using async workflows and rigorous Git code reviews.",
+      "Built the Angular admin dashboard for appointments, therapists and organisations , Chart.js and Angular Material on RxJS-driven async data flows — and the Django REST backend behind each feature.",
+      "Built reporting dashboards with multi-attribute filtering (year, revenue stream, subscription type, payment status), backed by DRF and MongoDB aggregation APIs.",
+      "Built a bulk user-onboarding feature (CSV/Excel via Papa Parse) with per-row validation on both UI and API, a downloadable template and invalid-rows file, and admin-only permissions on both layers.",
+      "Implemented RBAC and tenant isolation across organisation, therapist and patient data in Django REST + MongoDB/MongoEngine APIs, validating authorisation and isolation edge cases.",
+      "Structured the Angular app with lazy-loaded feature modules, role/org route guards, a Firebase-token auth interceptor, and shareReplay caching with TTL invalidation.",
+      "Traced inconsistent paid-appointment and revenue figures to two features reading different date fields, corrected the calculation, and regression-tested across payment methods and month boundaries.",
+      "Fixed a bulk-invoicing defect where actions only covered the visible table page: the backend now counts all unpaid, attended appointments and generates invoices from the full list, not just what was on screen.",
+      "Built an audit-logging system and optimised activity-log APIs with pagination, selective field loading and caching , eliminating N+1 query patterns and contributing to roughly 30% lower query latency overall.",
+      "Documented REST APIs with Swagger/OpenAPI, reviewed teammates' changes before merge, and agreed API contracts with frontend developers and business teams across Kenya and Germany.",
     ],
   },
   {
     id: "eanem",
-    role: "Frontend Engineering Intern",
+    role: "Frontend Developer Intern",
     stack: "Angular · REST API Integration",
     company: "E and M Technology House",
     location: "Tatu City, Kenya · On-site",
-    period: "August 2023 – January 2024",
+    period: "August 2023 – March 2024",
     color: "purple",
     bullets: [
-      "Built and maintained responsive UI features in Angular for a fintech front-end application, translating design specs into polished, reusable components.",
-      "Integrated REST APIs into the Angular UI to display account and transaction data, handling loading, error, and empty states.",
-      "Worked closely with backend engineers to consume secure banking APIs, shaping requirements around real UI needs.",
-      "Practiced component-based architecture, reactive forms, and cross-browser UI testing in a fast-paced, on-site team.",
+      "Built Angular interfaces for member accounts, loan tracking, contributions and transaction management across multiple financial institutions on a multi-tenant SACCO banking platform.",
+      "Translated SACCO operating requirements from stakeholders into working Angular modules, iterating on feedback.",
+      "Integrated and tested REST APIs with Postman, validating account and transaction data and catching defects before frontend integration and release.",
+      "Collaborated with backend engineers on API contracts and defect resolution.",
     ],
   },
   {
     id: "au",
     role: "Software Developer Intern",
-    stack: "WordPress · Microsoft Dynamics 365",
+    stack: "Microsoft Dynamics 365 Business Central",
     company: "Au Innovations",
     location: "Nairobi, Kenya · On-site",
     period: "May 2022 – August 2022",
     color: "pink",
     bullets: [
-      "Developed and maintained business web properties using WordPress CMS — custom content blocks, responsive pages, and client-facing workflows.",
-      "Supported internal digital transformation initiatives using Microsoft Dynamics 365 Business Central.",
-      "Authored technical system documentation, reducing application support overhead .",
+      "Supported Dynamics 365 Business Central workflows for internal digital-transformation initiatives.",
+      "Wrote process documentation that cut support overhead by approximately 30%.",
     ],
   },
 ];
 
 export const PROJECTS = [
   {
-    id: "xaidi-web",
+    id: "furniture-store",
     featured: true,
+    sideProject: true,
+    status: "In progress",
+    title: "Furniture Store",
+    subtitle: "Ecommerce Platform (backend) · Django REST Framework",
+    description:
+      "A furniture ecommerce backend built as a modular Django REST monolith — separate apps for accounts, catalog, inventory, cart, orders, payments and customers, each owning its own models and business logic. Products and variants are modelled separately (a product like a dining table has variants for finish and seat count), with inventory tracked at the variant level. Checkout uses select_for_update() inside atomic transactions so concurrent requests can't oversell the same stock, and orders store historical snapshots of product name, SKU and price so past orders stay accurate even after a product changes. Business workflows live in a service layer, kept out of models and views. A React + TypeScript frontend is planned but not yet started.",
+    result:
+      "Foundation, authentication (JWT, roles, permissions), catalog, inventory & cart, and the full order/checkout workflow are complete and tested with pytest. Currently building the payments phase — M-Pesa and Stripe integration, with provider webhooks (not frontend responses) treated as the source of truth for payment completion.",
+    tags: ["Django REST Framework", "PostgreSQL", "JWT", "pytest", "Docker"],
+    liveUrl: "https://luxury-living-nairobi.netlify.app",
+    gitHub: "https://github.com/Jess2001/furniture-store",
+    screenshot: "",
+    gallery: [],
+    architecture: {
+      "Domain Modelling":
+        "Product/ProductVariant split — inventory and SKUs live on the variant, not the product, since that's what's actually sellable",
+      Concurrency:
+        "Checkout wrapped in transaction.atomic() with select_for_update() row locking to prevent overselling under concurrent requests",
+      "Order Integrity":
+        "OrderItem stores historical snapshots (product name, variant, SKU, unit price) so past orders stay accurate after catalog changes",
+      "Service Layer":
+        "Business workflows (checkout, payments, refunds) separated from models/serializers/views into a dedicated service layer",
+    },
+    keyFeatures: [
+      "Modular Django REST monolith: accounts, catalog, inventory, cart, orders, payments and customers as separate apps",
+      "Variant-level inventory with concurrency-safe checkout (select_for_update, atomic transactions)",
+      "Historical order snapshots — past orders remain accurate even if product details change later",
+      "JWT authentication with role-based, server-side authorization",
+      "Payment attempts tracked independently from orders, so a failed payment allows retry without corrupting order state",
+      "Currently building: M-Pesa and Stripe integration, with provider webhooks as the source of truth for payment completion",
+    ],
+  },
+  {
+    id: "xaidi-web",
+    featured: false,
     title: "Xaidi Corporate Web Platform",
     subtitle: "Marketing Site · React + TypeScript",
     description:
@@ -432,14 +513,57 @@ export const PROJECTS = [
     },
   },
   {
+    id: "mobilend",
+    featured: false,
+    sideProject: true,
+    status: "In progress",
+    title: "MobiLend",
+    subtitle: "Digital Lending Platform · Django REST Framework",
+    description:
+      "A backend-only digital lending platform built around correctness under concurrency and account-integrity guarantees. Built a custom user model with JWT authentication, 6-role RBAC, OTP verification and password-reset flows. The database schema separates customer-domain data from authentication identity, with constraints protecting integrity end to end, and an atomic registration workflow that commits three related records in one transaction and rolls back on any failure.",
+    result:
+      "Unit and integrations pytest/pytest-django tests covering authentication, authorisation across all six roles, OTP verification and rollback behaviour. Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests.",
+    tags: [
+      "Django REST Framework",
+      "PostgreSQL",
+      "pytest",
+      "Docker",
+      "JWT",
+      "RBAC",
+    ],
+    liveUrl: "",
+    gitBackend: "https://github.com/Jess2001/MobiLendPlatform",
+    screenshot: "",
+    gallery: [],
+    architecture: {
+      "Custom User Model":
+        "JWT authentication via rest_framework_simplejwt, 6-role RBAC, OTP verification and password-reset flows",
+      "Schema Design":
+        "Customer-domain data separated from authentication identity, with constraints protecting data integrity; atomic 3-record registration transaction with rollback on failure",
+      "Concurrency Control":
+        "Row-level locking and unique constraints prevent duplicate customer numbers under concurrent requests",
+      "Testing & Containerisation":
+        "44 pytest/pytest-django tests; Dockerised with PostgreSQL; documented with Swagger/OpenAPI",
+    },
+    keyFeatures: [
+      "Custom user model with JWT authentication and 6-role RBAC",
+      "OTP verification and password-reset flows",
+      "Atomic registration workflow committing three related records in one transaction, with rollback on failure",
+      "Row-level locking prevents duplicate customer numbers under concurrent requests",
+      "44 pytest/pytest-django tests across authentication, authorisation, OTP and rollback behaviour",
+    ],
+  },
+
+  {
     id: "clinic-booking",
     featured: false,
+    sideProject: true,
     title: "Clinic Booking API",
     subtitle: "Concurrency-Safe Scheduling Engine · Django REST Framework",
     description:
       "A backend-only clinic appointment scheduling API built to survive the failure mode most booking systems get wrong: two people booking the same slot at the same time. Every appointment is validated against a fixed 30-minute grid stored in timezone-safe UTC, then written inside an atomic transaction guarded by a pessimistic row lock and a composite database constraint — so the database itself refuses a double-booking, not just the application code.",
     result:
-      "17 passing tests including a ThreadPoolExecutor concurrency test that fires simultaneous booking requests at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
+      "17 passing tests including a ThreadPoolExecutor concurrency test that fires booking requests roughly 200ms apart at the same slot and asserts exactly one succeeds. Deployed to Render with GitHub Actions running the full suite on every pull request.",
     tags: [
       "Python",
       "Django REST Framework",
@@ -523,15 +647,16 @@ export const PROJECTS = [
   {
     id: "edupulse",
     featured: false,
+    sideProject: true,
     title: "EduPulse Results",
-    subtitle: "Education Analytics · Angular 20 + Spring Boot",
+    subtitle: "Education Analytics · Angular 20 ",
     description:
       "Full-stack academic performance analytics platform enabling educators and administrators to track student progress in real-time. Built a scalable multi-role dashboard system (Admin, Teacher, Student) with shared components, reusable data tables, and interactive visualizations. Implemented lazy-loaded nested routes, environment-based API configuration, and role-based access control.",
     result:
       "Architected scalable codebase supporting  students across multiple forms with feature-based folder structure and  code reusability through component composition.",
     tags: [
       "Angular 20",
-      "Spring Boot",
+      //"Spring Boot",
       "TypeScript",
       "Chart.js",
       "REST APIs",
@@ -567,7 +692,7 @@ export const PROJECTS = [
     architecture: {
       "Frontend Stack":
         "Angular 20 (standalone components), RxJS Observables, Chart.js visualizations",
-      "Backend Stack": "Spring Boot 3.x, Java 21, REST controllers with CORS",
+      // "Backend Stack": "Spring Boot 3.x, Java 21, REST controllers with CORS",
       "Architecture Pattern":
         "Feature-based modules, lazy loading, shared sidebar with role-based nav, reusable component system",
     },

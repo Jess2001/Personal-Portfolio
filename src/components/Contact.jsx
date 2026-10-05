@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Icon } from "./ui";
-import { SOCIAL_LINKS } from "../data";
+import { SOCIAL_LINKS, PROFILE } from "../data";
 
 const inputClass =
   "w-full bg-bg border border-border focus:border-accent outline-none rounded-lg px-4 py-2.5 text-ink text-[14.5px] placeholder:text-ink-soft transition-colors";
@@ -16,7 +16,10 @@ export default function Contact() {
     const body = encodeURIComponent(
       `${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ""}`,
     );
-    window.location.href = `mailto:${SOCIAL_LINKS.email}?subject=${subject}&body=${body}`;
+    // Gmail's web compose works even when the visitor's browser has no
+    // default mail client configured, which plain mailto: links need.
+    const gmailCompose = `https://mail.google.com/mail/?view=cm&fs=1&to=${SOCIAL_LINKS.email}&su=${subject}&body=${body}`;
+    window.open(gmailCompose, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -26,14 +29,34 @@ export default function Contact() {
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
         <div>
-          <h2 className="text-[28px] md:text-[34px] font-semibold text-ink mb-5 tracking-[-0.01em]">
-            Interested in working together?
+          <h2 className="text-[28px] md:text-[34px] font-semibold text-ink leading-tight mb-5 tracking-[-0.01em]">
+            Working on something in healthcare, fintech, or a messy data
+            workflow?
           </h2>
-          <p className="text-ink-soft leading-7 max-w-md mb-8 text-[15.5px]">
-            I'm open to software engineering opportunities, particularly
-            backend and full-stack roles.
+          <p className="text-ink-soft leading-7 max-w-md mb-6 text-[15.5px]">
+            I'd like to hear about it. I'm open to software engineering
+            opportunities, particularly backend and full-stack roles.
           </p>
+
+          <a
+            href={SOCIAL_LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-lg text-[14.5px] font-medium transition-colors mb-8"
+          >
+            <Icon name="whatsapp" size={16} />
+            Message on WhatsApp
+          </a>
+
           <div className="space-y-3.5">
+            <a
+              href={SOCIAL_LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
+            >
+              <Icon name="whatsapp" size={16} /> WhatsApp
+            </a>
             <a
               href={`mailto:${SOCIAL_LINKS.email}`}
               className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
@@ -56,8 +79,16 @@ export default function Contact() {
             >
               <Icon name="github" size={16} /> GitHub
             </a>
+            {PROFILE.phone && (
+              <a
+                href={`tel:${PROFILE.phone.replace(/\s+/g, "")}`}
+                className="flex items-center gap-3 text-ink-soft hover:text-accent transition-colors text-[14.5px]"
+              >
+                <Icon name="phone" size={16} /> {PROFILE.phone}
+              </a>
+            )}
             <p className="flex items-center gap-3 text-ink-soft text-[14.5px]">
-              <Icon name="location" size={16} /> Nairobi, Kenya
+              <Icon name="location" size={16} /> {PROFILE.location}
             </p>
           </div>
         </div>
@@ -109,8 +140,8 @@ export default function Contact() {
             Send via email
           </button>
           <p className="text-ink-soft text-[12.5px] text-center">
-            Opens your email client with this message pre-filled — nothing
-            is stored.
+            Opens Gmail in a new tab with this message pre-filled — nothing is
+            stored. Prefer WhatsApp? Use the button above instead.
           </p>
         </form>
       </div>
